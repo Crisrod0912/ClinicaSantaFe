@@ -113,11 +113,11 @@ class Usuario {
     private function getRedirectByRole($rolId) {
         switch ($rolId) {
             case 1: 
-                return '../Administrativo/inicioAdmin.html';
+                return '../Administrativo/InicioAdmin.php';
             case 2: 
-                return '../Medicos/inicioMedico.html';
+                return '../Medicos/InicioMedico.php';
             case 3: 
-                return '../Paciente/inicioPaciente.html';
+                return '../Paciente/InicioPaciente.php';
             default:
                 return '../index.php';
         }

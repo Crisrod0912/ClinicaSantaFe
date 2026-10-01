@@ -15,23 +15,23 @@ class MedicamentoController {
             $id_estado = (int)($_POST['id_estado'] ?? 1);
 
             if (empty($nombre_completo) || empty($tiempo_tratamiento) || empty($indicaciones) || $id_medicamento == 0 || $id_paciente == 0) {
-                echo json_encode(['status' => 'error', 'message' => 'Todos los campos son requeridos']);
+                echo json_encode(['status' => 'error', 'message' => 'Todos los campos son requeridos.']);
                 return;
             }
 
             if ($medicamento->verificarMedicamentoAsignado($id_medicamento, $id_paciente)) {
-                echo json_encode(['status' => 'error', 'message' => 'Este medicamento ya está asignado al paciente']);
+                echo json_encode(['status' => 'error', 'message' => 'Este medicamento se encuentra asignado al paciente.']);
                 return;
             }
 
             if ($medicamento->asignarMedicamento($nombre_completo, $fecha_preescripcion, $tiempo_tratamiento, $indicaciones, $id_medicamento, $id_paciente, $id_estado)) {
-                echo json_encode(['status' => 'success', 'message' => 'Medicamento asignado exitosamente']);
+                echo json_encode(['status' => 'success', 'message' => 'Medicamento asignado exitosamente.']);
             } else {
-                echo json_encode(['status' => 'error', 'message' => 'No se pudo asignar el medicamento']);
+                echo json_encode(['status' => 'error', 'message' => 'No se pudo asignar el medicamento.']);
             }
         } catch (Exception $e) {
             error_log("Error en asignar: " . $e->getMessage());
-            echo json_encode(['status' => 'error', 'message' => 'Error interno del servidor']);
+            echo json_encode(['status' => 'error', 'message' => 'Error interno del servidor.']);
         }
     }
 
@@ -53,7 +53,7 @@ class MedicamentoController {
             $id_paciente = (int)($_GET['id_paciente'] ?? 0);
 
             if ($id_paciente == 0) {
-                echo json_encode(['status' => 'error', 'message' => 'ID de paciente requerido']);
+                echo json_encode(['status' => 'error', 'message' => 'ID de paciente requerido.']);
                 return;
             }
 
@@ -61,7 +61,7 @@ class MedicamentoController {
             echo json_encode(['status' => 'success', 'data' => $medicamentos]);
         } catch (Exception $e) {
             error_log("Error en listMedicamentosPaciente: " . $e->getMessage());
-            echo json_encode(['status' => 'error', 'message' => 'Error al obtener medicamentos del paciente']);
+            echo json_encode(['status' => 'error', 'message' => 'Error al obtener medicamentos del paciente.']);
         }
     }
 
@@ -71,7 +71,7 @@ class MedicamentoController {
             $id = (int)($_GET['id'] ?? 0);
 
             if ($id == 0) {
-                echo json_encode(['status' => 'error', 'message' => 'ID requerido']);
+                echo json_encode(['status' => 'error', 'message' => 'ID requerido.']);
                 return;
             }
 
@@ -80,11 +80,11 @@ class MedicamentoController {
             if ($medicamentoData) {
                 echo json_encode(['status' => 'success', 'data' => $medicamentoData]);
             } else {
-                echo json_encode(['status' => 'error', 'message' => 'Medicamento no encontrado']);
+                echo json_encode(['status' => 'error', 'message' => 'Medicamento no encontrado.']);
             }
         } catch (Exception $e) {
             error_log("Error en showMedicamentoPaciente: " . $e->getMessage());
-            echo json_encode(['status' => 'error', 'message' => 'Error al obtener el medicamento']);
+            echo json_encode(['status' => 'error', 'message' => 'Error al obtener el medicamento.']);
         }
     }
 
@@ -100,23 +100,23 @@ class MedicamentoController {
             $id_estado = (int)($_POST['id_estado'] ?? 1);
 
             if ($id_medicamento_paciente == 0) {
-                echo json_encode(['status' => 'error', 'message' => 'ID de medicamento requerido']);
+                echo json_encode(['status' => 'error', 'message' => 'ID de medicamento requerido.']);
                 return;
             }
 
             if (empty($nombre_completo) || empty($fecha_preescripcion) || empty($tiempo_tratamiento) || empty($indicaciones) || $id_medicamento == 0) {
-                echo json_encode(['status' => 'error', 'message' => 'Todos los campos son requeridos']);
+                echo json_encode(['status' => 'error', 'message' => 'Todos los campos son requeridos.']);
                 return;
             }
 
             if ($medicamento->actualizarMedicamentoPaciente($id_medicamento_paciente, $nombre_completo, $fecha_preescripcion, $tiempo_tratamiento, $indicaciones, $id_medicamento, $id_estado)) {
-                echo json_encode(['status' => 'success', 'message' => 'Medicamento actualizado exitosamente']);
+                echo json_encode(['status' => 'success', 'message' => 'Medicamento actualizado exitosamente.']);
             } else {
-                echo json_encode(['status' => 'error', 'message' => 'No se pudo actualizar el medicamento']);
+                echo json_encode(['status' => 'error', 'message' => 'No se pudo actualizar el medicamento.']);
             }
         } catch (Exception $e) {
             error_log("Error en actualizar: " . $e->getMessage());
-            echo json_encode(['status' => 'error', 'message' => 'Error al actualizar el medicamento']);
+            echo json_encode(['status' => 'error', 'message' => 'Error al actualizar el medicamento.']);
         }
     }
     
@@ -127,18 +127,18 @@ class MedicamentoController {
             $id_estado = (int)($_POST['id_estado'] ?? 0);
 
             if ($id_medicamento_paciente == 0 || $id_estado == 0) {
-                echo json_encode(['status' => 'error', 'message' => 'ID de medicamento y estado requeridos']);
+                echo json_encode(['status' => 'error', 'message' => 'ID de medicamento y estado requeridos.']);
                 return;
             }
 
             if ($medicamento->actualizarEstadoMedicamentoPaciente($id_medicamento_paciente, $id_estado)) {
-                echo json_encode(['status' => 'success', 'message' => 'Estado actualizado exitosamente']);
+                echo json_encode(['status' => 'success', 'message' => 'Estado actualizado exitosamente.']);
             } else {
-                echo json_encode(['status' => 'error', 'message' => 'No se pudo actualizar el estado']);
+                echo json_encode(['status' => 'error', 'message' => 'No se pudo actualizar el estado.']);
             }
         } catch (Exception $e) {
             error_log("Error en actualizarEstado: " . $e->getMessage());
-            echo json_encode(['status' => 'error', 'message' => 'Error al actualizar el estado']);
+            echo json_encode(['status' => 'error', 'message' => 'Error al actualizar el estado.']);
         }
     }
 
@@ -148,18 +148,18 @@ class MedicamentoController {
             $id = (int)($_POST['id'] ?? 0);
 
             if ($id == 0) {
-                echo json_encode(['status' => 'error', 'message' => 'ID requerido']);
+                echo json_encode(['status' => 'error', 'message' => 'ID requerido.']);
                 return;
             }
 
             if ($medicamento->eliminarMedicamentoPaciente($id)) {
-                echo json_encode(['status' => 'success', 'message' => 'Medicamento eliminado exitosamente']);
+                echo json_encode(['status' => 'success', 'message' => 'Medicamento eliminado exitosamente.']);
             } else {
-                echo json_encode(['status' => 'error', 'message' => 'No se pudo eliminar el medicamento']);
+                echo json_encode(['status' => 'error', 'message' => 'No se pudo eliminar el medicamento.']);
             }
         } catch (Exception $e) {
             error_log("Error en eliminar: " . $e->getMessage());
-            echo json_encode(['status' => 'error', 'message' => 'Error al eliminar el medicamento']);
+            echo json_encode(['status' => 'error', 'message' => 'Error al eliminar el medicamento.']);
         }
     }
 
@@ -176,7 +176,7 @@ class MedicamentoController {
                 if (isset($_SESSION['user']['id'])) {
                     $id_paciente = $_SESSION['user']['id'];
                 } else {
-                    echo json_encode(['status' => 'error', 'message' => 'Paciente no identificado']);
+                    echo json_encode(['status' => 'error', 'message' => 'Paciente no identificado.']);
                     return;
                 }
             }
@@ -185,7 +185,7 @@ class MedicamentoController {
             echo json_encode(['status' => 'success', 'data' => $medicamentos]);
         } catch (Exception $e) {
             error_log("Error en listMedicamentosActivos: " . $e->getMessage());
-            echo json_encode(['status' => 'error', 'message' => 'Error al obtener medicamentos activos']);
+            echo json_encode(['status' => 'error', 'message' => 'Error al obtener medicamentos activos.']);
         }
     }
 
@@ -195,7 +195,7 @@ class MedicamentoController {
             $cedula = trim($_GET['cedula'] ?? '');
 
             if (empty($cedula)) {
-                echo json_encode(['status' => 'error', 'message' => 'Cédula requerida']);
+                echo json_encode(['status' => 'error', 'message' => 'Cédula requerida.']);
                 return;
             }
 
@@ -204,11 +204,11 @@ class MedicamentoController {
             if ($paciente) {
                 echo json_encode(['status' => 'success', 'data' => $paciente]);
             } else {
-                echo json_encode(['status' => 'error', 'message' => 'Paciente no encontrado']);
+                echo json_encode(['status' => 'error', 'message' => 'Paciente no encontrado.']);
             }
         } catch (Exception $e) {
             error_log("Error en buscarPaciente: " . $e->getMessage());
-            echo json_encode(['status' => 'error', 'message' => 'Error al buscar el paciente']);
+            echo json_encode(['status' => 'error', 'message' => 'Error al buscar el paciente.']);
         }
     }
 
@@ -224,7 +224,7 @@ class MedicamentoController {
             echo json_encode(['status' => 'success', 'data' => array_values($medicamentosActivos)]);
         } catch (Exception $e) {
             error_log("Error en getCatalogoMedicamentos: " . $e->getMessage());
-            echo json_encode(['status' => 'error', 'message' => 'Error al obtener el catálogo de medicamentos']);
+            echo json_encode(['status' => 'error', 'message' => 'Error al obtener el catálogo de medicamentos.']);
         }
     }
     
@@ -236,7 +236,7 @@ class MedicamentoController {
             echo json_encode(['status' => 'success', 'data' => $medicaciones]);
         } catch (Exception $e) {
             error_log("Error en listMedicacionesPacientes: " . $e->getMessage());
-            echo json_encode(['status' => 'error', 'message' => 'Error al obtener medicaciones de pacientes']);
+            echo json_encode(['status' => 'error', 'message' => 'Error al obtener medicaciones de pacientes.']);
         }
     }
 
@@ -251,18 +251,18 @@ class MedicamentoController {
             $id_estado = (int)($_POST['id_estado'] ?? 1);
 
             if (empty($nombre) || $id_forma_farmaceutica == 0 || $id_grupo_terapeutico == 0 || $id_via_administracion == 0) {
-                echo json_encode(['status' => 'error', 'message' => 'Todos los campos son requeridos']);
+                echo json_encode(['status' => 'error', 'message' => 'Todos los campos son requeridos.']);
                 return;
             }
 
             if ($medicamento->crear($nombre, $id_forma_farmaceutica, $id_grupo_terapeutico, $id_via_administracion, $id_estado)) {
-                echo json_encode(['status' => 'success', 'message' => 'Medicamento creado exitosamente']);
+                echo json_encode(['status' => 'success', 'message' => 'Medicamento creado exitosamente.']);
             } else {
-                echo json_encode(['status' => 'error', 'message' => 'No se pudo crear el medicamento']);
+                echo json_encode(['status' => 'error', 'message' => 'No se pudo crear el medicamento.']);
             }
         } catch (Exception $e) {
             error_log("Error en create: " . $e->getMessage());
-            echo json_encode(['status' => 'error', 'message' => 'Error al crear el medicamento']);
+            echo json_encode(['status' => 'error', 'message' => 'Error al crear el medicamento.']);
         }
     }
 
@@ -274,7 +274,7 @@ class MedicamentoController {
             echo json_encode(['status' => 'success', 'data' => $medicamentos]);
         } catch (Exception $e) {
             error_log("Error en list: " . $e->getMessage());
-            echo json_encode(['status' => 'error', 'message' => 'Error al obtener la lista de medicamentos']);
+            echo json_encode(['status' => 'error', 'message' => 'Error al obtener la lista de medicamentos.']);
         }
     }
 
@@ -284,7 +284,7 @@ class MedicamentoController {
             $id = (int)($_GET['id'] ?? 0);
 
             if ($id == 0) {
-                echo json_encode(['status' => 'error', 'message' => 'ID requerido']);
+                echo json_encode(['status' => 'error', 'message' => 'ID requerido.']);
                 return;
             }
 
@@ -293,11 +293,11 @@ class MedicamentoController {
             if ($medicamentoData) {
                 echo json_encode(['status' => 'success', 'data' => $medicamentoData]);
             } else {
-                echo json_encode(['status' => 'error', 'message' => 'Medicamento no encontrado']);
+                echo json_encode(['status' => 'error', 'message' => 'Medicamento no encontrado.']);
             }
         } catch (Exception $e) {
             error_log("Error en show: " . $e->getMessage());
-            echo json_encode(['status' => 'error', 'message' => 'Error al obtener el medicamento']);
+            echo json_encode(['status' => 'error', 'message' => 'Error al obtener el medicamento.']);
         }
     }
 
@@ -312,23 +312,23 @@ class MedicamentoController {
             $id_estado = (int)($_POST['id_estado'] ?? 1);
 
             if ($id == 0) {
-                echo json_encode(['status' => 'error', 'message' => 'ID requerido']);
+                echo json_encode(['status' => 'error', 'message' => 'ID requerido.']);
                 return;
             }
 
             if (empty($nombre) || $id_forma_farmaceutica == 0 || $id_grupo_terapeutico == 0 || $id_via_administracion == 0) {
-                echo json_encode(['status' => 'error', 'message' => 'Todos los campos son requeridos']);
+                echo json_encode(['status' => 'error', 'message' => 'Todos los campos son requeridos.']);
                 return;
             }
 
             if ($medicamento->actualizar($id, $nombre, $id_forma_farmaceutica, $id_grupo_terapeutico, $id_via_administracion, $id_estado)) {
-                echo json_encode(['status' => 'success', 'message' => 'Medicamento actualizado exitosamente']);
+                echo json_encode(['status' => 'success', 'message' => 'Medicamento actualizado exitosamente.']);
             } else {
-                echo json_encode(['status' => 'error', 'message' => 'No se pudo actualizar el medicamento']);
+                echo json_encode(['status' => 'error', 'message' => 'No se pudo actualizar el medicamento.']);
             }
         } catch (Exception $e) {
             error_log("Error en update: " . $e->getMessage());
-            echo json_encode(['status' => 'error', 'message' => 'Error al actualizar el medicamento']);
+            echo json_encode(['status' => 'error', 'message' => 'Error al actualizar el medicamento.']);
         }
     }
 
@@ -339,18 +339,18 @@ class MedicamentoController {
             $id_estado = (int)($_POST['id_estado'] ?? 0);
 
             if ($id == 0 || $id_estado == 0) {
-                echo json_encode(['status' => 'error', 'message' => 'ID y estado requeridos']);
+                echo json_encode(['status' => 'error', 'message' => 'ID y estado requeridos.']);
                 return;
             }
 
             if ($medicamento->actualizarEstado($id, $id_estado)) {
-                echo json_encode(['status' => 'success', 'message' => 'Estado actualizado exitosamente']);
+                echo json_encode(['status' => 'success', 'message' => 'Estado actualizado exitosamente.']);
             } else {
-                echo json_encode(['status' => 'error', 'message' => 'No se pudo actualizar el estado']);
+                echo json_encode(['status' => 'error', 'message' => 'No se pudo actualizar el estado.']);
             }
         } catch (Exception $e) {
             error_log("Error en updateStatus: " . $e->getMessage());
-            echo json_encode(['status' => 'error', 'message' => 'Error al actualizar el estado']);
+            echo json_encode(['status' => 'error', 'message' => 'Error al actualizar el estado.']);
         }
     }
     
@@ -360,18 +360,18 @@ class MedicamentoController {
             $id = (int)($_POST['id'] ?? 0);
 
             if ($id == 0) {
-                echo json_encode(['status' => 'error', 'message' => 'ID requerido']);
+                echo json_encode(['status' => 'error', 'message' => 'ID requerido.']);
                 return;
             }
 
             if ($medicamento->eliminar($id)) {
-                echo json_encode(['status' => 'success', 'message' => 'Medicamento eliminado exitosamente']);
+                echo json_encode(['status' => 'success', 'message' => 'Medicamento eliminado exitosamente.']);
             } else {
-                echo json_encode(['status' => 'error', 'message' => 'No se pudo eliminar el medicamento']);
+                echo json_encode(['status' => 'error', 'message' => 'No se pudo eliminar el medicamento.']);
             }
         } catch (Exception $e) {
             error_log("Error en delete: " . $e->getMessage());
-            echo json_encode(['status' => 'error', 'message' => 'Error al eliminar el medicamento']);
+            echo json_encode(['status' => 'error', 'message' => 'Error al eliminar el medicamento.']);
         }
     }
 
@@ -381,7 +381,7 @@ class MedicamentoController {
             $termino = $_GET['termino'] ?? '';
 
             if (empty($termino)) {
-                echo json_encode(['status' => 'error', 'message' => 'Término de búsqueda requerido']);
+                echo json_encode(['status' => 'error', 'message' => 'Término de búsqueda requerido.']);
                 return;
             }
 
@@ -389,7 +389,7 @@ class MedicamentoController {
             echo json_encode(['status' => 'success', 'data' => $medicamentos]);
         } catch (Exception $e) {
             error_log("Error en search: " . $e->getMessage());
-            echo json_encode(['status' => 'error', 'message' => 'Error en la búsqueda']);
+            echo json_encode(['status' => 'error', 'message' => 'Error en la búsqueda.']);
         }
     }
 
@@ -400,7 +400,7 @@ class MedicamentoController {
             echo json_encode(['status' => 'success', 'data' => $formas]);
         } catch (Exception $e) {
             error_log("Error en getFormasFarmaceuticas: " . $e->getMessage());
-            echo json_encode(['status' => 'error', 'message' => 'Error al obtener formas farmacéuticas']);
+            echo json_encode(['status' => 'error', 'message' => 'Error al obtener formas farmacéuticas.']);
         }
     }
 
@@ -411,7 +411,7 @@ class MedicamentoController {
             echo json_encode(['status' => 'success', 'data' => $grupos]);
         } catch (Exception $e) {
             error_log("Error en getGruposTerapeuticos: " . $e->getMessage());
-            echo json_encode(['status' => 'error', 'message' => 'Error al obtener grupos terapéuticos']);
+            echo json_encode(['status' => 'error', 'message' => 'Error al obtener grupos terapéuticos.']);
         }
     }
 
@@ -422,7 +422,7 @@ class MedicamentoController {
             echo json_encode(['status' => 'success', 'data' => $vias]);
         } catch (Exception $e) {
             error_log("Error en getViasAdministracion: " . $e->getMessage());
-            echo json_encode(['status' => 'error', 'message' => 'Error al obtener vías de administración']);
+            echo json_encode(['status' => 'error', 'message' => 'Error al obtener vías de administración.']);
         }
     }
 }

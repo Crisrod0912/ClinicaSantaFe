@@ -19,12 +19,12 @@ class UsuarioController {
             $id_estado = $_POST['id_estado'] ?? 1;
 
             if (empty($cedula) || empty($nombre) || empty($apellidos) || empty($correo) || empty($direccion) || empty($password) || empty($id_rol)) {
-                echo json_encode(['status' => 'error', 'message' => 'Todos los campos obligatorios son requeridos']);
+                echo json_encode(['status' => 'error', 'message' => 'Todos los campos obligatorios son requeridos.']);
                 return;
             }
 
             if ($usuario->registrar($cedula, $nombre, $apellidos, $correo, $telefono, $fecha_nacimiento, $direccion, $password, $id_genero, $id_estado_civil, $id_rol, $id_estado)) {
-                echo json_encode(['status' => 'success', 'message' => 'Usuario registrado exitosamente']);
+                echo json_encode(['status' => 'success', 'message' => 'Usuario registrado exitosamente.']);
             } else {
                 echo json_encode(['status' => 'error', 'message' => 'No se pudo registrar el usuario. Verifique que la cédula o correo no estén duplicados.']);
             }
@@ -50,7 +50,7 @@ class UsuarioController {
             $id = $_GET['id'] ?? 0;
 
             if (empty($id) || !is_numeric($id)) {
-                echo json_encode(['status' => 'error', 'message' => 'ID de usuario inválido']);
+                echo json_encode(['status' => 'error', 'message' => 'ID de usuario inválido.']);
                 return;
             }
 
@@ -59,7 +59,7 @@ class UsuarioController {
             if ($item) {
                 echo json_encode(['status' => 'success', 'data' => $item]);
             } else {
-                echo json_encode(['status' => 'error', 'message' => 'Usuario no encontrado']);
+                echo json_encode(['status' => 'error', 'message' => 'Usuario no encontrado.']);
             }
         } catch (Exception $e) {
             echo json_encode(['status' => 'error', 'message' => 'Error al obtener usuario: ' . $e->getMessage()]);
@@ -84,17 +84,17 @@ class UsuarioController {
             $id_estado = $_POST['id_estado'] ?? 1;
 
             if (empty($id_usuario) || !is_numeric($id_usuario)) {
-                echo json_encode(['status' => 'error', 'message' => 'ID de usuario inválido']);
+                echo json_encode(['status' => 'error', 'message' => 'ID de usuario inválido.']);
                 return;
             }
 
             if (empty($cedula) || empty($nombre) || empty($apellidos) || empty($correo) || empty($direccion) || empty($id_rol)) {
-                echo json_encode(['status' => 'error', 'message' => 'Todos los campos obligatorios son requeridos']);
+                echo json_encode(['status' => 'error', 'message' => 'Todos los campos obligatorios son requeridos.']);
                 return;
             }
 
             if ($usuario->actualizar($id_usuario, $cedula, $nombre, $apellidos, $correo, $telefono, $fecha_nacimiento, $direccion, $password, $id_genero, $id_estado_civil, $id_rol, $id_estado)) {
-                echo json_encode(['status' => 'success', 'message' => 'Usuario actualizado exitosamente']);
+                echo json_encode(['status' => 'success', 'message' => 'Usuario actualizado exitosamente.']);
             } else {
                 echo json_encode(['status' => 'error', 'message' => 'No se pudo actualizar el usuario. Verifique que el correo no esté duplicado.']);
             }
@@ -110,19 +110,19 @@ class UsuarioController {
             $id_estado = $_POST['id_estado'] ?? 0;
 
             if (empty($id_usuario) || !is_numeric($id_usuario)) {
-                echo json_encode(['status' => 'error', 'message' => 'ID de usuario inválido']);
+                echo json_encode(['status' => 'error', 'message' => 'ID de usuario inválido.']);
                 return;
             }
 
             if (empty($id_estado) || !is_numeric($id_estado)) {
-                echo json_encode(['status' => 'error', 'message' => 'Estado inválido']);
+                echo json_encode(['status' => 'error', 'message' => 'Estado inválido.']);
                 return;
             }
 
             if ($usuario->actualizarEstado($id_usuario, $id_estado)) {
-                echo json_encode(['status' => 'success', 'message' => 'Estado del usuario actualizado']);
+                echo json_encode(['status' => 'success', 'message' => 'Estado del usuario actualizado.']);
             } else {
-                echo json_encode(['status' => 'error', 'message' => 'No se pudo actualizar el estado']);
+                echo json_encode(['status' => 'error', 'message' => 'No se pudo actualizar el estado.']);
             }
         } catch (Exception $e) {
             echo json_encode(['status' => 'error', 'message' => 'Error al actualizar estado: ' . $e->getMessage()]);
@@ -135,12 +135,12 @@ class UsuarioController {
             $id = $_POST['id'] ?? 0;
 
             if (empty($id) || !is_numeric($id)) {
-                echo json_encode(['status' => 'error', 'message' => 'ID de usuario inválido']);
+                echo json_encode(['status' => 'error', 'message' => 'ID de usuario inválido.']);
                 return;
             }
 
             if ($usuario->eliminar($id)) {
-                echo json_encode(['status' => 'success', 'message' => 'Usuario eliminado exitosamente']);
+                echo json_encode(['status' => 'success', 'message' => 'Usuario eliminado exitosamente.']);
             } else {
                 echo json_encode(['status' => 'error', 'message' => 'No se pudo eliminar el usuario. Puede que tenga registros asociados.']);
             }

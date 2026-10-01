@@ -11,19 +11,19 @@ class MedicoEspecialidadController {
             $id_estado = $_POST['id_estado'] ?? 1;
 
             if (empty($id_medico) || empty($id_especialidad) || empty($id_estado)) {
-                echo json_encode(['status' => 'error', 'message' => 'Todos los campos son obligatorios']);
+                echo json_encode(['status' => 'error', 'message' => 'Todos los campos son obligatorios.']);
                 return;
             }
 
             if (!is_numeric($id_medico) || !is_numeric($id_especialidad) || !is_numeric($id_estado)) {
-                echo json_encode(['status' => 'error', 'message' => 'Los datos deben ser válidos']);
+                echo json_encode(['status' => 'error', 'message' => 'Los datos deben ser válidos.']);
                 return;
             }
 
             if ($medicoEspecialidad->registrar($id_medico, $id_especialidad, $id_estado)) {
-                echo json_encode(['status' => 'success', 'message' => 'Especialidad asignada exitosamente']);
+                echo json_encode(['status' => 'success', 'message' => 'Especialidad asignada exitosamente.']);
             } else {
-                echo json_encode(['status' => 'error', 'message' => 'Esta asignación ya existe o no se pudo crear']);
+                echo json_encode(['status' => 'error', 'message' => 'Esta asignación ya existe o no se pudo crear.']);
             }
         } catch (Exception $e) {
             echo json_encode(['status' => 'error', 'message' => 'Error interno: ' . $e->getMessage()]);
@@ -47,7 +47,7 @@ class MedicoEspecialidadController {
             $id = $_GET['id'] ?? 0;
 
             if (empty($id) || !is_numeric($id)) {
-                echo json_encode(['status' => 'error', 'message' => 'ID de asignación inválido']);
+                echo json_encode(['status' => 'error', 'message' => 'ID de asignación inválido.']);
                 return;
             }
 
@@ -56,7 +56,7 @@ class MedicoEspecialidadController {
             if ($item) {
                 echo json_encode(['status' => 'success', 'data' => $item]);
             } else {
-                echo json_encode(['status' => 'error', 'message' => 'Asignación no encontrada']);
+                echo json_encode(['status' => 'error', 'message' => 'Asignación no encontrada.']);
             }
         } catch (Exception $e) {
             echo json_encode(['status' => 'error', 'message' => 'Error al obtener asignación: ' . $e->getMessage()]);
@@ -72,24 +72,24 @@ class MedicoEspecialidadController {
             $id_estado = $_POST['id_estado'] ?? 1;
 
             if (empty($id_medico_especialidad) || !is_numeric($id_medico_especialidad)) {
-                echo json_encode(['status' => 'error', 'message' => 'ID de asignación inválido']);
+                echo json_encode(['status' => 'error', 'message' => 'ID de asignación inválido.']);
                 return;
             }
 
             if (empty($id_medico) || empty($id_especialidad) || empty($id_estado)) {
-                echo json_encode(['status' => 'error', 'message' => 'Todos los campos son obligatorios']);
+                echo json_encode(['status' => 'error', 'message' => 'Todos los campos son obligatorios.']);
                 return;
             }
 
             if (!is_numeric($id_medico) || !is_numeric($id_especialidad) || !is_numeric($id_estado)) {
-                echo json_encode(['status' => 'error', 'message' => 'Los datos deben ser válidos']);
+                echo json_encode(['status' => 'error', 'message' => 'Los datos deben ser válidos.']);
                 return;
             }
 
             if ($medicoEspecialidad->actualizar($id_medico_especialidad, $id_medico, $id_especialidad, $id_estado)) {
-                echo json_encode(['status' => 'success', 'message' => 'Asignación actualizada exitosamente']);
+                echo json_encode(['status' => 'success', 'message' => 'Asignación actualizada exitosamente.']);
             } else {
-                echo json_encode(['status' => 'error', 'message' => 'Esta asignación ya existe o no se pudo actualizar']);
+                echo json_encode(['status' => 'error', 'message' => 'Esta asignación ya existe o no se pudo actualizar.']);
             }
         } catch (Exception $e) {
             echo json_encode(['status' => 'error', 'message' => 'Error al actualizar asignación: ' . $e->getMessage()]);
@@ -104,19 +104,19 @@ class MedicoEspecialidadController {
             $id_estado = $_POST['id_estado'] ?? 0;
 
             if (empty($id_medico_especialidad) || !is_numeric($id_medico_especialidad)) {
-                echo json_encode(['status' => 'error', 'message' => 'ID de asignación inválido']);
+                echo json_encode(['status' => 'error', 'message' => 'ID de asignación inválido.']);
                 return;
             }
 
             if (empty($id_estado) || !is_numeric($id_estado)) {
-                echo json_encode(['status' => 'error', 'message' => 'Estado inválido']);
+                echo json_encode(['status' => 'error', 'message' => 'Estado inválido.']);
                 return;
             }
 
             if ($medicoEspecialidad->actualizarEstado($id_medico_especialidad, $id_estado)) {
-                echo json_encode(['status' => 'success', 'message' => 'Estado de la asignación actualizado']);
+                echo json_encode(['status' => 'success', 'message' => 'Estado de la asignación actualizado.']);
             } else {
-                echo json_encode(['status' => 'error', 'message' => 'No se pudo actualizar el estado']);
+                echo json_encode(['status' => 'error', 'message' => 'No se pudo actualizar el estado.']);
             }
         } catch (Exception $e) {
             echo json_encode(['status' => 'error', 'message' => 'Error al actualizar estado: ' . $e->getMessage()]);
@@ -129,14 +129,14 @@ class MedicoEspecialidadController {
             $id = $_POST['id'] ?? 0;
 
             if (empty($id) || !is_numeric($id)) {
-                echo json_encode(['status' => 'error', 'message' => 'ID de asignación inválido']);
+                echo json_encode(['status' => 'error', 'message' => 'ID de asignación inválido.']);
                 return;
             }
 
             if ($medicoEspecialidad->eliminar($id)) {
-                echo json_encode(['status' => 'success', 'message' => 'Asignación eliminada exitosamente']);
+                echo json_encode(['status' => 'success', 'message' => 'Asignación eliminada exitosamente.']);
             } else {
-                echo json_encode(['status' => 'error', 'message' => 'No se pudo eliminar la asignación']);
+                echo json_encode(['status' => 'error', 'message' => 'No se pudo eliminar la asignación.']);
             }
         } catch (Exception $e) {
             echo json_encode(['status' => 'error', 'message' => 'Error al eliminar asignación: ' . $e->getMessage()]);
@@ -184,7 +184,7 @@ class MedicoEspecialidadController {
             echo json_encode(['status' => 'success', 'data' => $especialidades]);
         } catch (Exception $e) {
             error_log("Error en listMySpecialties: " . $e->getMessage());
-            echo json_encode(['status' => 'error', 'message' => 'Error al obtener tus especialidades']);
+            echo json_encode(['status' => 'error', 'message' => 'Error al obtener tus especialidades.']);
         }
     }
 }

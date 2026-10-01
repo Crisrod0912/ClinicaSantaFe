@@ -22,10 +22,10 @@ class CitaController {
 
         if (empty($fecha) || empty($hora) || empty($cedula_paciente) || 
             empty($id_servicio) || empty($id_especialidad)) {
-            error_log("ERROR: Campos obligatorios vacíos");
+            error_log("ERROR: Campos obligatorios vacíos.");
             error_log("Fecha: '$fecha', Hora: '$hora', Cedula: '$cedula_paciente'");
             error_log("Servicio: '$id_servicio', Especialidad: '$id_especialidad'");
-            echo json_encode(['status' => 'error', 'message' => 'Todos los campos son obligatorios']);
+            echo json_encode(['status' => 'error', 'message' => 'Todos los campos son obligatorios.']);
             return;
         }
 
@@ -34,7 +34,7 @@ class CitaController {
         
         if (!$paciente) {
             error_log("ERROR: Paciente no encontrado con cédula: " . $cedula_paciente);
-            echo json_encode(['status' => 'error', 'message' => 'Paciente no encontrado']);
+            echo json_encode(['status' => 'error', 'message' => 'Paciente no encontrado.']);
             return;
         }
         
@@ -44,25 +44,25 @@ class CitaController {
         $medico_disponible = $cita->buscarMedicoDisponible($id_especialidad, $fecha, $hora);
         
         if (!$medico_disponible) {
-            error_log("ERROR: No hay médicos disponibles");
-            echo json_encode(['status' => 'error', 'message' => 'No hay médicos disponibles en este horario']);
+            error_log("ERROR: No hay médicos disponibles.");
+            echo json_encode(['status' => 'error', 'message' => 'No hay médicos disponibles en este horario.']);
             return;
         }
         
         error_log("Médico disponible encontrado: " . $medico_disponible);
 
-        error_log("Intentando registrar cita con datos:");
+        error_log("Intentando registrar cita con datos...");
         error_log("Fecha: $fecha, Hora: $hora, Paciente: $cedula_paciente");
         error_log("Médico: $medico_disponible, Servicio: $id_servicio, Especialidad: $id_especialidad");
         
         $resultado = $cita->registrarCitaAdmin($fecha, $hora, $cedula_paciente, $medico_disponible, $id_servicio, $id_especialidad, $id_estado);
         
         if ($resultado) {
-            error_log("SUCCESS: Cita registrada exitosamente");
-            echo json_encode(['status' => 'success', 'message' => 'Cita registrada exitosamente']);
+            error_log("SUCCESS: Cita registrada exitosamente.");
+            echo json_encode(['status' => 'success', 'message' => 'Cita registrada exitosamente.']);
         } else {
-            error_log("ERROR: No se pudo registrar la cita - método retornó false");
-            echo json_encode(['status' => 'error', 'message' => 'No se pudo registrar la cita - Error en base de datos']);
+            error_log("ERROR: No se pudo registrar la cita - método retornó false.");
+            echo json_encode(['status' => 'error', 'message' => 'No se pudo registrar la cita - Error en base de datos.']);
         }
         
         error_log("=== FIN CREATE CITA ADMIN ===");
@@ -82,8 +82,8 @@ class CitaController {
         error_log("Session data: " . print_r($_SESSION, true));
         
         if (!isset($_SESSION['user']['id'])) {
-            error_log("ERROR: No hay sesión activa");
-            echo json_encode(['status' => 'error', 'message' => 'Sesión no iniciada']);
+            error_log("ERROR: No hay sesión de usuario activa.");
+            echo json_encode(['status' => 'error', 'message' => 'Sesión no iniciada.']);
             return;
         }
 
@@ -96,10 +96,10 @@ class CitaController {
         $id_estado = $_POST['id_estado'] ?? 3;
 
         if (empty($fecha) || empty($hora) || empty($id_servicio) || empty($id_especialidad)) {
-            error_log("ERROR: Campos obligatorios vacíos");
+            error_log("ERROR: Campos obligatorios vacíos.");
             error_log("Fecha: '$fecha', Hora: '$hora'");
             error_log("Servicio: '$id_servicio', Especialidad: '$id_especialidad'");
-            echo json_encode(['status' => 'error', 'message' => 'Todos los campos son obligatorios']);
+            echo json_encode(['status' => 'error', 'message' => 'Todos los campos son obligatorios.']);
             return;
         }
 
@@ -107,14 +107,14 @@ class CitaController {
         $medico_disponible = $cita->buscarMedicoDisponible($id_especialidad, $fecha, $hora);
         
         if (!$medico_disponible) {
-            error_log("ERROR: No hay médicos disponibles");
-            echo json_encode(['status' => 'error', 'message' => 'No hay médicos disponibles en este horario']);
+            error_log("ERROR: No hay médicos disponibles.");
+            echo json_encode(['status' => 'error', 'message' => 'No hay médicos disponibles en este horario.']);
             return;
         }
         
         error_log("Médico disponible encontrado: " . $medico_disponible);
 
-        error_log("Intentando registrar cita para paciente con datos:");
+        error_log("Intentando registrar cita para paciente con datos...");
         error_log("Usuario ID: " . $_SESSION['user']['id'] . ", Fecha: $fecha, Hora: $hora");
         error_log("Servicio: $id_servicio, Especialidad: $id_especialidad");
         
@@ -122,10 +122,10 @@ class CitaController {
 
         if ($resultado) {
             error_log("SUCCESS: Cita registrada exitosamente.");
-            echo json_encode(['status' => 'success', 'message' => 'Cita registrada exitosamente']);
+            echo json_encode(['status' => 'success', 'message' => 'Cita registrada exitosamente.']);
         } else {
-            error_log("ERROR: No se pudo registrar la cita - método retornó false");
-            echo json_encode(['status' => 'error', 'message' => 'No se pudo registrar la cita o no hay médicos disponibles']);
+            error_log("ERROR: No se pudo registrar la cita - método retornó false.");
+            echo json_encode(['status' => 'error', 'message' => 'No se pudo registrar la cita o no hay médicos disponibles.']);
         }
         
         error_log("=== FIN CREATE CITA PACIENTE ===");
@@ -146,7 +146,7 @@ class CitaController {
             $citas = $cita->obtenerPorUsuario($id_usuario);
             echo json_encode(['status' => 'success', 'data' => $citas]);
         } else {
-            echo json_encode(['status' => 'error', 'message' => 'ID de usuario requerido']);
+            echo json_encode(['status' => 'error', 'message' => 'ID de usuario requerido.']);
         }
     }
 
@@ -165,7 +165,7 @@ class CitaController {
         
         if (!isset($_SESSION['user']['id'])) {
             error_log("ERROR: No hay ID de usuario en sesión.");
-            echo json_encode(['status' => 'error', 'message' => 'Sesión no iniciada']);
+            echo json_encode(['status' => 'error', 'message' => 'Sesión no iniciada.']);
             exit;
         }
         
@@ -174,7 +174,7 @@ class CitaController {
         
         if ($user_role != 2) {
             error_log("ERROR: Usuario no es médico. Rol actual: " . $user_role);
-            echo json_encode(['status' => 'error', 'message' => 'Acceso denegado - Solo médicos']);
+            echo json_encode(['status' => 'error', 'message' => 'Acceso denegado - Solo médicos.']);
             exit;
         }
         
@@ -215,7 +215,7 @@ class CitaController {
         if ($item) {
             echo json_encode(['status' => 'success', 'data' => $item]);
         } else {
-            echo json_encode(['status' => 'error', 'message' => 'Cita no encontrada']);
+            echo json_encode(['status' => 'error', 'message' => 'Cita no encontrada.']);
         }
     }
 
@@ -232,14 +232,14 @@ class CitaController {
         $id_medico = $cita->buscarMedicoDisponible($id_especialidad, $fecha, $hora);
         
         if (!$id_medico) {
-            echo json_encode(['status' => 'error', 'message' => 'No hay médicos disponibles para esta fecha y hora']);
+            echo json_encode(['status' => 'error', 'message' => 'No hay médicos disponibles para esta fecha y hora.']);
             return;
         }
 
         if ($cita->actualizar($id_cita, $fecha, $hora, $id_medico, $id_servicio, $id_especialidad, $id_estado)) {
-            echo json_encode(['status' => 'success', 'message' => 'Cita actualizada exitosamente']);
+            echo json_encode(['status' => 'success', 'message' => 'Cita actualizada exitosamente.']);
         } else {
-            echo json_encode(['status' => 'error', 'message' => 'No se pudo actualizar la cita']);
+            echo json_encode(['status' => 'error', 'message' => 'No se pudo actualizar la cita.']);
         }
     }
 
@@ -282,7 +282,7 @@ class CitaController {
             $citaExistente = $cita->obtenerPorId($id_cita);
             if (!$citaExistente) {
                 error_log("ERROR: Cita no encontrada con ID: " . $id_cita);
-                echo json_encode(['status' => 'error', 'message' => 'Cita no encontrada']);
+                echo json_encode(['status' => 'error', 'message' => 'Cita no encontrada.']);
                 return;
             }
 
@@ -290,7 +290,7 @@ class CitaController {
             $paciente = $cita->buscarPacientePorCedula($cedula_paciente);
             if (!$paciente) {
                 error_log("ERROR: Paciente no encontrado con cédula: " . $cedula_paciente);
-                echo json_encode(['status' => 'error', 'message' => 'Paciente no encontrado con la cédula proporcionada']);
+                echo json_encode(['status' => 'error', 'message' => 'Paciente no encontrado con la cédula proporcionada.']);
                 return;
             }
 
@@ -301,25 +301,25 @@ class CitaController {
             $id_medico = $cita->buscarMedicoDisponible($id_especialidad, $fecha, $hora);
             
             if (!$id_medico) {
-                error_log("ERROR: No hay médicos disponibles para los parámetros dados");
-                echo json_encode(['status' => 'error', 'message' => 'No hay médicos disponibles para esta fecha, hora y especialidad']);
+                error_log("ERROR: No hay médicos disponibles para los parámetros dados.");
+                echo json_encode(['status' => 'error', 'message' => 'No hay médicos disponibles para esta fecha, hora y especialidad.']);
                 return;
             }
             
             error_log("Médico disponible encontrado - ID: " . $id_medico);
 
-            error_log("Intentando actualizar cita con datos:");
+            error_log("Intentando actualizar cita con datos...");
             error_log("ID Cita: $id_cita, Fecha: $fecha, Hora: $hora");
             error_log("Usuario: $id_usuario, Médico: $id_medico, Servicio: $id_servicio, Especialidad: $id_especialidad, Estado: $id_estado");
             
             $resultado = $cita->actualizarCompleta($id_cita, $fecha, $hora, $id_usuario, $id_medico, $id_servicio, $id_especialidad, $id_estado);
             
             if ($resultado) {
-                error_log("SUCCESS: Cita actualizada exitosamente");
-                echo json_encode(['status' => 'success', 'message' => 'Cita actualizada exitosamente']);
+                error_log("SUCCESS: Cita actualizada exitosamente.");
+                echo json_encode(['status' => 'success', 'message' => 'Cita actualizada exitosamente.']);
             } else {
                 error_log("ERROR: No se pudo actualizar la cita - método retornó false");
-                echo json_encode(['status' => 'error', 'message' => 'No se pudo actualizar la cita. Error en base de datos']);
+                echo json_encode(['status' => 'error', 'message' => 'No se pudo actualizar la cita. Error en base de datos.']);
             }
             
         } catch (Exception $e) {
@@ -342,9 +342,9 @@ class CitaController {
         $id_estado = $_POST['id_estado'] ?? 0;
 
         if ($cita->actualizarEstado($id_cita, $id_estado)) {
-            echo json_encode(['status' => 'success', 'message' => 'Estado de cita actualizado']);
+            echo json_encode(['status' => 'success', 'message' => 'Estado de cita actualizado.']);
         } else {
-            echo json_encode(['status' => 'error', 'message' => 'No se pudo actualizar el estado']);
+            echo json_encode(['status' => 'error', 'message' => 'No se pudo actualizar el estado.']);
         }
     }
 
@@ -353,9 +353,9 @@ class CitaController {
         $id = $_POST['id'] ?? 0;
 
         if ($cita->eliminar($id)) {
-            echo json_encode(['status' => 'success', 'message' => 'Cita eliminada exitosamente']);
+            echo json_encode(['status' => 'success', 'message' => 'Cita eliminada exitosamente.']);
         } else {
-            echo json_encode(['status' => 'error', 'message' => 'No se pudo eliminar la cita']);
+            echo json_encode(['status' => 'error', 'message' => 'No se pudo eliminar la cita.']);
         }
     }
 
@@ -368,11 +368,7 @@ class CitaController {
 
         $disponible = $cita->verificarDisponibilidad($fecha, $hora, $id_medico);
 
-        echo json_encode([
-            'status' => 'success', 
-            'disponible' => $disponible,
-            'message' => $disponible ? 'Horario disponible' : 'Horario no disponible'
-        ]);
+        echo json_encode(['status' => 'success', 'disponible' => $disponible, 'message' => $disponible ? 'Horario disponible' : 'Horario no disponible.']);
     }
 
     public function getByDate() {
@@ -383,7 +379,7 @@ class CitaController {
             $citas = $cita->obtenerPorFecha($fecha);
             echo json_encode(['status' => 'success', 'data' => $citas]);
         } else {
-            echo json_encode(['status' => 'error', 'message' => 'Fecha requerida']);
+            echo json_encode(['status' => 'error', 'message' => 'Fecha requerida.']);
         }
     }
 
@@ -398,7 +394,7 @@ class CitaController {
             $medicos = $cita->obtenerMedicosDisponibles($id_especialidad, $fecha, $hora);
             echo json_encode(['status' => 'success', 'data' => $medicos]);
         } else {
-            echo json_encode(['status' => 'error', 'message' => 'Especialidad, fecha y hora requeridos']);
+            echo json_encode(['status' => 'error', 'message' => 'Especialidad, fecha y hora requeridos.']);
         }
     }
 
@@ -418,11 +414,11 @@ class CitaController {
                 echo json_encode(['status' => 'success', 'data' => $paciente]);
             } else {
                 error_log("Paciente no encontrado");
-                echo json_encode(['status' => 'error', 'message' => 'Paciente no encontrado']);
+                echo json_encode(['status' => 'error', 'message' => 'Paciente no encontrado.']);
             }
         } else {
-            error_log("ERROR: Cédula no proporcionada");
-            echo json_encode(['status' => 'error', 'message' => 'Cédula requerida']);
+            error_log("ERROR: Cédula no proporcionada.");
+            echo json_encode(['status' => 'error', 'message' => 'Cédula requerida.']);
         }
     }
 
@@ -456,7 +452,7 @@ class CitaController {
         }
         
         if (!isset($_SESSION['user']['id'])) {
-            echo json_encode(['status' => 'error', 'message' => 'Sesión no iniciada']);
+            echo json_encode(['status' => 'error', 'message' => 'Sesión no iniciada.']);
             return;
         }
         

@@ -1,5 +1,5 @@
 <?php
-error_log("AuthController: Archivo cargado");
+error_log("AuthController: Archivo cargado.");
 
 class AuthController {
 
@@ -23,7 +23,7 @@ class AuthController {
             
             if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
                 error_log("AuthController: Método no es POST, es: " . $_SERVER['REQUEST_METHOD']);
-                echo json_encode(['success' => false, 'message' => 'Método no permitido']);
+                echo json_encode(['success' => false, 'message' => 'Método no permitido.']);
                 return;
             }
 
@@ -35,7 +35,7 @@ class AuthController {
 
             if (empty($cedula) || empty($password)) {
                 error_log("AuthController: Campos vacíos");
-                echo json_encode(['success' => false, 'message' => 'Por favor complete todos los campos']);
+                echo json_encode(['success' => false, 'message' => 'Por favor complete todos los campos.']);
                 return;
             }
 
@@ -44,7 +44,7 @@ class AuthController {
                 error_log("AuthController: Usuario.php no encontrado en: " . $usuarioPath);
                 error_log("AuthController: Directorio actual: " . getcwd());
                 
-                echo json_encode(['success' => false, 'message' => 'Modelo Usuario no encontrado']);
+                echo json_encode(['success' => false, 'message' => 'Modelo Usuario no encontrado.']);
                 return;
             }
 
@@ -84,7 +84,7 @@ class AuthController {
         
         try {
             if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-                echo json_encode(['success' => false, 'message' => 'Método no permitido']);
+                echo json_encode(['success' => false, 'message' => 'Método no permitido.']);
                 return;
             }
 
@@ -107,7 +107,7 @@ class AuthController {
 
             if (empty($cedula) || empty($nombre) || empty($apellidos) || 
                 empty($correo) || empty($password)) {
-                echo json_encode(['success' => false, 'message' => 'Todos los campos obligatorios deben ser completados']);
+                echo json_encode(['success' => false, 'message' => 'Todos los campos obligatorios deben ser completados.']);
                 return;
             }
 
@@ -118,9 +118,9 @@ class AuthController {
             );
 
             if ($result) {
-                echo json_encode(['success' => true, 'message' => 'Usuario registrado exitosamente']);
+                echo json_encode(['success' => true, 'message' => 'Usuario registrado exitosamente.']);
             } else {
-                echo json_encode(['success' => false, 'message' => 'Error al registrar usuario. Posiblemente la cédula o correo ya existen']);
+                echo json_encode(['success' => false, 'message' => 'Error al registrar usuario. Posiblemente la cédula o correo ya existen.']);
             }
 
         } catch (Exception $e) {
@@ -144,7 +144,7 @@ class AuthController {
         header('Pragma: no-cache');
         header('Expires: 0');
         
-        header('Location: /sc502-3c2025-grupo3/Registro/Login.php?logout=1');
+        header('Location: /ClinicaSantaFe/Registro/Login.php?logout=1');
         exit;
     }
 }

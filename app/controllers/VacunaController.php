@@ -15,18 +15,18 @@ class VacunaController {
 
             if (empty($nombre_completo) || empty($fecha_vacunacion) || empty($tiempo_tratamiento) || 
                 empty($dosis) || empty($cedula_paciente) || $id_vacuna == 0) {
-                echo json_encode(['status' => 'error', 'message' => 'Todos los campos son requeridos']);
+                echo json_encode(['status' => 'error', 'message' => 'Todos los campos son requeridos.']);
                 return;
             }
 
             if ($vacuna->registrarVacunaAdmin($nombre_completo, $fecha_vacunacion, $tiempo_tratamiento, $dosis, $descripcion, $cedula_paciente, $id_vacuna)) {
-                echo json_encode(['status' => 'success', 'message' => 'Vacunación registrada exitosamente']);
+                echo json_encode(['status' => 'success', 'message' => 'Vacunación registrada exitosamente.']);
             } else {
-                echo json_encode(['status' => 'error', 'message' => 'No se pudo registrar la vacunación']);
+                echo json_encode(['status' => 'error', 'message' => 'No se pudo registrar la vacunación.']);
             }
         } catch (Exception $e) {
             error_log("Error en create vacuna: " . $e->getMessage());
-            echo json_encode(['status' => 'error', 'message' => 'Error al registrar la vacunación']);
+            echo json_encode(['status' => 'error', 'message' => 'Error al registrar la vacunación.']);
         }
     }
 
@@ -42,18 +42,18 @@ class VacunaController {
 
             if (empty($nombre_completo) || empty($fecha_vacunacion) || empty($tiempo_tratamiento) || 
                 empty($dosis) || $id_vacuna == 0) {
-                echo json_encode(['status' => 'error', 'message' => 'Todos los campos son requeridos']);
+                echo json_encode(['status' => 'error', 'message' => 'Todos los campos son requeridos.']);
                 return;
             }
 
             if ($vacuna->registrarVacunaPaciente($nombre_completo, $fecha_vacunacion, $tiempo_tratamiento, $dosis, $descripcion, $id_vacuna)) {
-                echo json_encode(['status' => 'success', 'message' => 'Vacunación registrada exitosamente']);
+                echo json_encode(['status' => 'success', 'message' => 'Vacunación registrada exitosamente.']);
             } else {
-                echo json_encode(['status' => 'error', 'message' => 'No se pudo registrar la vacunación']);
+                echo json_encode(['status' => 'error', 'message' => 'No se pudo registrar la vacunación.']);
             }
         } catch (Exception $e) {
             error_log("Error en createForPatient vacuna: " . $e->getMessage());
-            echo json_encode(['status' => 'error', 'message' => 'Error al registrar la vacunación']);
+            echo json_encode(['status' => 'error', 'message' => 'Error al registrar la vacunación.']);
         }
     }
 
@@ -65,7 +65,7 @@ class VacunaController {
             echo json_encode(['status' => 'success', 'data' => $vacunas]);
         } catch (Exception $e) {
             error_log("Error en list vacunas: " . $e->getMessage());
-            echo json_encode(['status' => 'error', 'message' => 'Error al obtener las vacunaciones']);
+            echo json_encode(['status' => 'error', 'message' => 'Error al obtener las vacunaciones.']);
         }
     }
 
@@ -75,7 +75,7 @@ class VacunaController {
             $id_usuario = $_GET['id_usuario'] ?? 0;
 
             if ($id_usuario == 0) {
-                echo json_encode(['status' => 'error', 'message' => 'ID de usuario requerido']);
+                echo json_encode(['status' => 'error', 'message' => 'ID de usuario requerido.']);
                 return;
             }
 
@@ -83,7 +83,7 @@ class VacunaController {
             echo json_encode(['status' => 'success', 'data' => $vacunas]);
         } catch (Exception $e) {
             error_log("Error en listByUser vacunas: " . $e->getMessage());
-            echo json_encode(['status' => 'error', 'message' => 'Error al obtener las vacunaciones del usuario']);
+            echo json_encode(['status' => 'error', 'message' => 'Error al obtener las vacunaciones del usuario.']);
         }
     }
 
@@ -95,7 +95,7 @@ class VacunaController {
             echo json_encode(['status' => 'success', 'data' => $vacunas]);
         } catch (Exception $e) {
             error_log("Error en listMyVaccines: " . $e->getMessage());
-            echo json_encode(['status' => 'error', 'message' => 'Error al obtener tus vacunaciones']);
+            echo json_encode(['status' => 'error', 'message' => 'Error al obtener tus vacunaciones.']);
         }
     }
 
@@ -105,7 +105,7 @@ class VacunaController {
             $id = $_GET['id'] ?? 0;
 
             if ($id == 0) {
-                echo json_encode(['status' => 'error', 'message' => 'ID requerido']);
+                echo json_encode(['status' => 'error', 'message' => 'ID requerido.']);
                 return;
             }
 
@@ -114,11 +114,11 @@ class VacunaController {
             if ($item) {
                 echo json_encode(['status' => 'success', 'data' => $item]);
             } else {
-                echo json_encode(['status' => 'error', 'message' => 'Vacunación no encontrada']);
+                echo json_encode(['status' => 'error', 'message' => 'Vacunación no encontrada.']);
             }
         } catch (Exception $e) {
             error_log("Error en show vacuna: " . $e->getMessage());
-            echo json_encode(['status' => 'error', 'message' => 'Error al obtener la vacunación']);
+            echo json_encode(['status' => 'error', 'message' => 'Error al obtener la vacunación.']);
         }
     }
 
@@ -128,7 +128,7 @@ class VacunaController {
             $id = $_GET['id'] ?? 0;
 
             if ($id == 0) {
-                echo json_encode(['status' => 'error', 'message' => 'ID requerido']);
+                echo json_encode(['status' => 'error', 'message' => 'ID requerido.']);
                 return;
             }
 
@@ -137,11 +137,11 @@ class VacunaController {
             if ($vacunaData) {
                 echo json_encode(['status' => 'success', 'data' => $vacunaData]);
             } else {
-                echo json_encode(['status' => 'error', 'message' => 'Vacunación no encontrada']);
+                echo json_encode(['status' => 'error', 'message' => 'Vacunación no encontrada.']);
             }
         } catch (Exception $e) {
             error_log("Error en showVacunaPaciente: " . $e->getMessage());
-            echo json_encode(['status' => 'error', 'message' => 'Error al obtener la vacunación']);
+            echo json_encode(['status' => 'error', 'message' => 'Error al obtener la vacunación.']);
         }
     }
 
@@ -157,24 +157,24 @@ class VacunaController {
             $id_vacuna = $_POST['id_vacuna'] ?? 0;
 
             if ($id_vacuna_paciente == 0) {
-                echo json_encode(['status' => 'error', 'message' => 'ID de vacunación requerido']);
+                echo json_encode(['status' => 'error', 'message' => 'ID de vacunación requerido.']);
                 return;
             }
 
             if (empty($nombre_completo) || empty($fecha_vacunacion) || empty($tiempo_tratamiento) || 
                 empty($dosis) || $id_vacuna == 0) {
-                echo json_encode(['status' => 'error', 'message' => 'Todos los campos son requeridos']);
+                echo json_encode(['status' => 'error', 'message' => 'Todos los campos son requeridos.']);
                 return;
             }
 
             if ($vacuna->actualizar($id_vacuna_paciente, $nombre_completo, $fecha_vacunacion, $tiempo_tratamiento, $dosis, $descripcion, $id_vacuna)) {
-                echo json_encode(['status' => 'success', 'message' => 'Vacunación actualizada exitosamente']);
+                echo json_encode(['status' => 'success', 'message' => 'Vacunación actualizada exitosamente.']);
             } else {
-                echo json_encode(['status' => 'error', 'message' => 'No se pudo actualizar la vacunación']);
+                echo json_encode(['status' => 'error', 'message' => 'No se pudo actualizar la vacunación.']);
             }
         } catch (Exception $e) {
             error_log("Error en update vacuna: " . $e->getMessage());
-            echo json_encode(['status' => 'error', 'message' => 'Error al actualizar la vacunación']);
+            echo json_encode(['status' => 'error', 'message' => 'Error al actualizar la vacunación.']);
         }
     }
 
@@ -185,24 +185,24 @@ class VacunaController {
             $id_estado = $_POST['id_estado'] ?? 0;
 
             if ($id_vacuna_paciente == 0 || $id_estado == 0) {
-                echo json_encode(['status' => 'error', 'message' => 'ID de vacunación y estado requeridos']);
+                echo json_encode(['status' => 'error', 'message' => 'ID de vacunación y estado requeridos.']);
                 return;
             }
 
             if (!in_array($id_estado, [1, 2])) {
-                echo json_encode(['status' => 'error', 'message' => 'Estado no válido']);
+                echo json_encode(['status' => 'error', 'message' => 'Estado no válido.']);
                 return;
             }
 
             if ($vacuna->actualizarEstadoVacunaPaciente($id_vacuna_paciente, $id_estado)) {
-                $mensaje = $id_estado == 1 ? 'Vacunación habilitada exitosamente' : 'Vacunación deshabilitada exitosamente';
+                $mensaje = $id_estado == 1 ? 'Vacunación habilitada exitosamente.' : 'Vacunación deshabilitada exitosamente.';
                 echo json_encode(['status' => 'success', 'message' => $mensaje]);
             } else {
-                echo json_encode(['status' => 'error', 'message' => 'No se pudo actualizar el estado']);
+                echo json_encode(['status' => 'error', 'message' => 'No se pudo actualizar el estado.']);
             }
         } catch (Exception $e) {
             error_log("Error en updateEstadoVacuna: " . $e->getMessage());
-            echo json_encode(['status' => 'error', 'message' => 'Error al actualizar el estado']);
+            echo json_encode(['status' => 'error', 'message' => 'Error al actualizar el estado.']);
         }
     }
 
@@ -212,18 +212,18 @@ class VacunaController {
             $id = $_POST['id'] ?? 0;
 
             if ($id == 0) {
-                echo json_encode(['status' => 'error', 'message' => 'ID requerido']);
+                echo json_encode(['status' => 'error', 'message' => 'ID requerido.']);
                 return;
             }
 
             if ($vacuna->eliminar($id)) {
-                echo json_encode(['status' => 'success', 'message' => 'Vacunación eliminada exitosamente']);
+                echo json_encode(['status' => 'success', 'message' => 'Vacunación eliminada exitosamente.']);
             } else {
-                echo json_encode(['status' => 'error', 'message' => 'No se pudo eliminar la vacunación']);
+                echo json_encode(['status' => 'error', 'message' => 'No se pudo eliminar la vacunación.']);
             }
         } catch (Exception $e) {
             error_log("Error en delete vacuna: " . $e->getMessage());
-            echo json_encode(['status' => 'error', 'message' => 'Error al eliminar la vacunación']);
+            echo json_encode(['status' => 'error', 'message' => 'Error al eliminar la vacunación.']);
         }
     }
 
@@ -233,7 +233,7 @@ class VacunaController {
             $fecha = $_GET['fecha'] ?? '';
 
             if (empty($fecha)) {
-                echo json_encode(['status' => 'error', 'message' => 'Fecha requerida']);
+                echo json_encode(['status' => 'error', 'message' => 'Fecha requerida.']);
                 return;
             }
 
@@ -241,7 +241,7 @@ class VacunaController {
             echo json_encode(['status' => 'success', 'data' => $vacunas]);
         } catch (Exception $e) {
             error_log("Error en getByDate vacunas: " . $e->getMessage());
-            echo json_encode(['status' => 'error', 'message' => 'Error al obtener vacunaciones por fecha']);
+            echo json_encode(['status' => 'error', 'message' => 'Error al obtener vacunaciones por fecha.']);
         }
     }
 
@@ -253,7 +253,7 @@ class VacunaController {
             echo json_encode(['status' => 'success', 'data' => $vacunas]);
         } catch (Exception $e) {
             error_log("Error en getAvailableVaccines: " . $e->getMessage());
-            echo json_encode(['status' => 'error', 'message' => 'Error al obtener vacunas disponibles']);
+            echo json_encode(['status' => 'error', 'message' => 'Error al obtener vacunas disponibles.']);
         }
     }
 
@@ -263,7 +263,7 @@ class VacunaController {
             $cedula = $_GET['cedula'] ?? '';
 
             if (empty($cedula)) {
-                echo json_encode(['status' => 'error', 'message' => 'Cédula requerida']);
+                echo json_encode(['status' => 'error', 'message' => 'Cédula requerida.']);
                 return;
             }
 
@@ -272,11 +272,11 @@ class VacunaController {
             if ($paciente) {
                 echo json_encode(['status' => 'success', 'data' => $paciente]);
             } else {
-                echo json_encode(['status' => 'error', 'message' => 'Paciente no encontrado']);
+                echo json_encode(['status' => 'error', 'message' => 'Paciente no encontrado.']);
             }
         } catch (Exception $e) {
             error_log("Error en searchPatientVacuna: " . $e->getMessage());
-            echo json_encode(['status' => 'error', 'message' => 'Error al buscar paciente']);
+            echo json_encode(['status' => 'error', 'message' => 'Error al buscar paciente.']);
         }
     }
 
@@ -288,7 +288,7 @@ class VacunaController {
             echo json_encode(['status' => 'success', 'data' => $vacunas]);
         } catch (Exception $e) {
             error_log("Error en getVacunasCatalogo: " . $e->getMessage());
-            echo json_encode(['status' => 'error', 'message' => 'Error al obtener catálogo de vacunas']);
+            echo json_encode(['status' => 'error', 'message' => 'Error al obtener catálogo de vacunas.']);
         }
     }
 
@@ -302,18 +302,18 @@ class VacunaController {
             $id_estado = $_POST['id_estado'] ?? 1;
 
             if (empty($nombre) || $id_enfermedad == 0 || $id_esquema_vacunacion == 0 || $id_via_administracion == 0) {
-                echo json_encode(['status' => 'error', 'message' => 'Todos los campos son requeridos']);
+                echo json_encode(['status' => 'error', 'message' => 'Todos los campos son requeridos.']);
                 return;
             }
 
             if ($vacuna->crearVacunaCatalogo($nombre, $id_enfermedad, $id_esquema_vacunacion, $id_via_administracion, $id_estado)) {
-                echo json_encode(['status' => 'success', 'message' => 'Vacuna registrada exitosamente']);
+                echo json_encode(['status' => 'success', 'message' => 'Vacuna registrada exitosamente.']);
             } else {
-                echo json_encode(['status' => 'error', 'message' => 'No se pudo registrar la vacuna']);
+                echo json_encode(['status' => 'error', 'message' => 'No se pudo registrar la vacuna.']);
             }
         } catch (Exception $e) {
             error_log("Error en createVacunaCatalogo: " . $e->getMessage());
-            echo json_encode(['status' => 'error', 'message' => 'Error al registrar la vacuna']);
+            echo json_encode(['status' => 'error', 'message' => 'Error al registrar la vacuna.']);
         }
     }
 
@@ -325,7 +325,7 @@ class VacunaController {
             echo json_encode(['status' => 'success', 'data' => $vacunas]);
         } catch (Exception $e) {
             error_log("Error en listVacunasCatalogo: " . $e->getMessage());
-            echo json_encode(['status' => 'error', 'message' => 'Error al obtener las vacunas']);
+            echo json_encode(['status' => 'error', 'message' => 'Error al obtener las vacunas.']);
         }
     }
 
@@ -335,7 +335,7 @@ class VacunaController {
             $id = $_GET['id'] ?? 0;
 
             if ($id == 0) {
-                echo json_encode(['status' => 'error', 'message' => 'ID requerido']);
+                echo json_encode(['status' => 'error', 'message' => 'ID requerido.']);
                 return;
             }
 
@@ -344,11 +344,11 @@ class VacunaController {
             if ($item) {
                 echo json_encode(['status' => 'success', 'data' => $item]);
             } else {
-                echo json_encode(['status' => 'error', 'message' => 'Vacuna no encontrada']);
+                echo json_encode(['status' => 'error', 'message' => 'Vacuna no encontrada.']);
             }
         } catch (Exception $e) {
             error_log("Error en showVacunaCatalogo: " . $e->getMessage());
-            echo json_encode(['status' => 'error', 'message' => 'Error al obtener la vacuna']);
+            echo json_encode(['status' => 'error', 'message' => 'Error al obtener la vacuna.']);
         }
     }
 
@@ -363,23 +363,23 @@ class VacunaController {
             $id_estado = $_POST['id_estado'] ?? 1;
 
             if ($id == 0) {
-                echo json_encode(['status' => 'error', 'message' => 'ID de vacuna requerido']);
+                echo json_encode(['status' => 'error', 'message' => 'ID de vacuna requerido.']);
                 return;
             }
 
             if (empty($nombre) || $id_enfermedad == 0 || $id_esquema_vacunacion == 0 || $id_via_administracion == 0) {
-                echo json_encode(['status' => 'error', 'message' => 'Todos los campos son requeridos']);
+                echo json_encode(['status' => 'error', 'message' => 'Todos los campos son requeridos.']);
                 return;
             }
 
             if ($vacuna->actualizarVacunaCatalogo($id, $nombre, $id_enfermedad, $id_esquema_vacunacion, $id_via_administracion, $id_estado)) {
-                echo json_encode(['status' => 'success', 'message' => 'Vacuna actualizada exitosamente']);
+                echo json_encode(['status' => 'success', 'message' => 'Vacuna actualizada exitosamente.']);
             } else {
-                echo json_encode(['status' => 'error', 'message' => 'No se pudo actualizar la vacuna']);
+                echo json_encode(['status' => 'error', 'message' => 'No se pudo actualizar la vacuna.']);
             }
         } catch (Exception $e) {
             error_log("Error en updateVacunaCatalogo: " . $e->getMessage());
-            echo json_encode(['status' => 'error', 'message' => 'Error al actualizar la vacuna']);
+            echo json_encode(['status' => 'error', 'message' => 'Error al actualizar la vacuna.']);
         }
     }
 
@@ -390,18 +390,18 @@ class VacunaController {
             $id_estado = $_POST['id_estado'] ?? 0;
 
             if ($id == 0 || $id_estado == 0) {
-                echo json_encode(['status' => 'error', 'message' => 'ID y estado requeridos']);
+                echo json_encode(['status' => 'error', 'message' => 'ID y estado requeridos.']);
                 return;
             }
 
             if ($vacuna->actualizarEstadoVacunaCatalogo($id, $id_estado)) {
-                echo json_encode(['status' => 'success', 'message' => 'Estado actualizado exitosamente']);
+                echo json_encode(['status' => 'success', 'message' => 'Estado actualizado exitosamente.']);
             } else {
-                echo json_encode(['status' => 'error', 'message' => 'No se pudo actualizar el estado']);
+                echo json_encode(['status' => 'error', 'message' => 'No se pudo actualizar el estado.']);
             }
         } catch (Exception $e) {
             error_log("Error en updateVacunaStatus: " . $e->getMessage());
-            echo json_encode(['status' => 'error', 'message' => 'Error al actualizar el estado']);
+            echo json_encode(['status' => 'error', 'message' => 'Error al actualizar el estado.']);
         }
     }
 
@@ -411,18 +411,18 @@ class VacunaController {
             $id = $_POST['id'] ?? 0;
 
             if ($id == 0) {
-                echo json_encode(['status' => 'error', 'message' => 'ID requerido']);
+                echo json_encode(['status' => 'error', 'message' => 'ID requerido.']);
                 return;
             }
 
             if ($vacuna->eliminarVacunaCatalogo($id)) {
-                echo json_encode(['status' => 'success', 'message' => 'Vacuna eliminada exitosamente']);
+                echo json_encode(['status' => 'success', 'message' => 'Vacuna eliminada exitosamente.']);
             } else {
-                echo json_encode(['status' => 'error', 'message' => 'No se pudo eliminar la vacuna']);
+                echo json_encode(['status' => 'error', 'message' => 'No se pudo eliminar la vacuna.']);
             }
         } catch (Exception $e) {
             error_log("Error en deleteVacunaCatalogo: " . $e->getMessage());
-            echo json_encode(['status' => 'error', 'message' => 'Error al eliminar la vacuna']);
+            echo json_encode(['status' => 'error', 'message' => 'Error al eliminar la vacuna.']);
         }
     }
 
@@ -432,7 +432,7 @@ class VacunaController {
             $termino = $_GET['termino'] ?? '';
 
             if (empty($termino)) {
-                echo json_encode(['status' => 'error', 'message' => 'Término de búsqueda requerido']);
+                echo json_encode(['status' => 'error', 'message' => 'Término de búsqueda requerido.']);
                 return;
             }
 
@@ -440,7 +440,7 @@ class VacunaController {
             echo json_encode(['status' => 'success', 'data' => $vacunas]);
         } catch (Exception $e) {
             error_log("Error en searchVacunasCatalogo: " . $e->getMessage());
-            echo json_encode(['status' => 'error', 'message' => 'Error al buscar vacunas']);
+            echo json_encode(['status' => 'error', 'message' => 'Error al buscar vacunas.']);
         }
     }
 
@@ -452,7 +452,7 @@ class VacunaController {
             echo json_encode(['status' => 'success', 'data' => $enfermedades]);
         } catch (Exception $e) {
             error_log("Error en getEnfermedades: " . $e->getMessage());
-            echo json_encode(['status' => 'error', 'message' => 'Error al obtener enfermedades']);
+            echo json_encode(['status' => 'error', 'message' => 'Error al obtener enfermedades.']);
         }
     }
 
@@ -464,7 +464,7 @@ class VacunaController {
             echo json_encode(['status' => 'success', 'data' => $esquemas]);
         } catch (Exception $e) {
             error_log("Error en getEsquemasVacunacion: " . $e->getMessage());
-            echo json_encode(['status' => 'error', 'message' => 'Error al obtener esquemas de vacunación']);
+            echo json_encode(['status' => 'error', 'message' => 'Error al obtener esquemas de vacunación.']);
         }
     }
 
@@ -476,7 +476,7 @@ class VacunaController {
             echo json_encode(['status' => 'success', 'data' => $estados]);
         } catch (Exception $e) {
             error_log("Error en getStatesVacuna: " . $e->getMessage());
-            echo json_encode(['status' => 'error', 'message' => 'Error al obtener estados']);
+            echo json_encode(['status' => 'error', 'message' => 'Error al obtener estados.']);
         }
     }
 
@@ -488,7 +488,7 @@ class VacunaController {
             echo json_encode(['status' => 'success', 'data' => $vias]);
         } catch (Exception $e) {
             error_log("Error en getViasAdministracion: " . $e->getMessage());
-            echo json_encode(['status' => 'error', 'message' => 'Error al obtener vías de administración']);
+            echo json_encode(['status' => 'error', 'message' => 'Error al obtener vías de administración.']);
         }
     }
 

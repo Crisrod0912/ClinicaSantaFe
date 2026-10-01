@@ -10,7 +10,7 @@ class ExpedienteController {
         if ($data) {
             echo json_encode(['status' => 'success', 'data' => $data]);
         } else {
-            echo json_encode(['status' => 'error', 'message' => 'Expediente no encontrado']);
+            echo json_encode(['status' => 'error', 'message' => 'Expediente no encontrado.']);
         }
     }
 
@@ -23,10 +23,10 @@ class ExpedienteController {
             if ($data) {
                 echo json_encode(['status' => 'success', 'data' => $data]);
             } else {
-                echo json_encode(['status' => 'error', 'message' => 'Expediente no encontrado']);
+                echo json_encode(['status' => 'error', 'message' => 'Expediente no encontrado.']);
             }
         } else {
-            echo json_encode(['status' => 'error', 'message' => 'ID de usuario requerido']);
+            echo json_encode(['status' => 'error', 'message' => 'ID de usuario requerido.']);
         }
     }
 
@@ -46,9 +46,9 @@ class ExpedienteController {
         $cirugias = $_POST['cirugias'] ?? '';
 
         if ($expediente->actualizarExpediente($correo, $telefono, $estado_civil, $fecha_nacimiento, $genero, $direccion, $peso, $altura, $tipo_sangre, $enfermedades, $alergias, $cirugias)) {
-            echo json_encode(['status' => 'success', 'message' => 'Expediente actualizado exitosamente']);
+            echo json_encode(['status' => 'success', 'message' => 'Expediente actualizado exitosamente.']);
         } else {
-            echo json_encode(['status' => 'error', 'message' => 'No se pudo actualizar el expediente']);
+            echo json_encode(['status' => 'error', 'message' => 'No se pudo actualizar el expediente.']);
         }
     }
 
@@ -62,10 +62,10 @@ class ExpedienteController {
             if ($paciente) {
                 echo json_encode(['status' => 'success', 'data' => $paciente]);
             } else {
-                echo json_encode(['status' => 'error', 'message' => 'Paciente no encontrado']);
+                echo json_encode(['status' => 'error', 'message' => 'Paciente no encontrado.']);
             }
         } else {
-            echo json_encode(['status' => 'error', 'message' => 'Cédula requerida']);
+            echo json_encode(['status' => 'error', 'message' => 'Cédula requerida.']);
         }
     }
 
@@ -94,12 +94,12 @@ class ExpedienteController {
 
         if ($id_usuario > 0) {
             if ($expediente->actualizarExpedienteAdmin($id_usuario, $correo, $telefono, $estado_civil, $fecha_nacimiento, $genero, $direccion, $peso, $altura, $tipo_sangre, $enfermedades, $alergias, $cirugias)) {
-                echo json_encode(['status' => 'success', 'message' => 'Expediente actualizado exitosamente']);
+                echo json_encode(['status' => 'success', 'message' => 'Expediente actualizado exitosamente.']);
             } else {
-                echo json_encode(['status' => 'error', 'message' => 'No se pudo actualizar el expediente']);
+                echo json_encode(['status' => 'error', 'message' => 'No se pudo actualizar el expediente.']);
             }
         } else {
-            echo json_encode(['status' => 'error', 'message' => 'ID de usuario requerido']);
+            echo json_encode(['status' => 'error', 'message' => 'ID de usuario requerido.']);
         }
     }
 }
