@@ -1,7 +1,7 @@
 let editingMedicamentoId = null;
 
 if (typeof $ === 'undefined') {
-    console.error('jQuery no está cargado');
+    console.error('jQuery no está cargado.');
 }
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -26,26 +26,26 @@ function initializePage() {
     const currentPage = window.location.pathname;
     const fileName = currentPage.split('/').pop();
 
-    if (fileName === 'RegistrarMedicamentos.html') {
-        console.log('Detectado formulario de registro de medicamento');
+    if (fileName === 'RegistrarMedicamentos.php') {
+        console.log('Detectado formulario de registro de medicamento.');
         loadFormData();
     }
 
-    else if (fileName === 'EditarMedicamento.html') {
-        console.log('Detectado formulario de actualización de medicamento');
+    else if (fileName === 'EditarMedicamento.php') {
+        console.log('Detectado formulario de actualización de medicamento.');
         loadFormData();
         loadMedicamentoForEditing();
     }
 
     else if (fileName === 'Medicamentos.php' || document.querySelector('.custom-table')) {
-        console.log('Detectada tabla de medicamentos');
+        console.log('Detectada tabla de medicamentos.');
         loadMedicamentos();
     }
 }
 
 function setupEventListeners() {
     if (typeof $ === 'undefined') {
-        console.error('jQuery no disponible para event listeners');
+        console.error('jQuery no disponible para event listeners.');
         return;
     }
 
@@ -70,7 +70,7 @@ function loadMedicamentoForEditing() {
     const medicamentoId = urlParams.get('id');
 
     if (!medicamentoId) {
-        alert('Error: No se especificó qué medicamento editar');
+        alert('Error: No se especificó qué medicamento editar.');
         window.location.href = 'Medicamentos.php';
         return;
     }
@@ -99,7 +99,7 @@ function loadMedicamentoForEditing() {
         error: function (xhr, status, error) {
             hideLoadingOverlay();
             console.error('Error al cargar medicamento:', error);
-            alert('Error de conexión al cargar el medicamento');
+            alert('Error de conexión al cargar medicamento.');
             window.location.href = 'Medicamentos.php';
         }
     });
@@ -148,12 +148,12 @@ function loadMedicamentos() {
             if (response.status === 'success') {
                 populateMedicamentosTable(response.data);
             } else {
-                $('.custom-table tbody').html('<tr><td colspan="6" class="text-center">No se pudieron cargar los medicamentos</td></tr>');
+                $('.custom-table tbody').html('<tr><td colspan="6" class="text-center">No se pudieron cargar los medicamentos.</td></tr>');
             }
         },
         error: function (xhr, status, error) {
             console.error('Error al cargar medicamentos:', error, xhr.responseText);
-            $('.custom-table tbody').html('<tr><td colspan="6" class="text-center">Error al cargar los medicamentos</td></tr>');
+            $('.custom-table tbody').html('<tr><td colspan="6" class="text-center">Error al cargar medicamentos.</td></tr>');
         }
     });
 }
@@ -162,7 +162,7 @@ function populateMedicamentosTable(medicamentos) {
     const tbody = $('.custom-table tbody');
 
     if (!medicamentos || medicamentos.length === 0) {
-        tbody.html('<tr><td colspan="6" class="text-center">No hay medicamentos registrados</td></tr>');
+        tbody.html('<tr><td colspan="6" class="text-center">No hay medicamentos registrados.</td></tr>');
         return;
     }
 
@@ -171,7 +171,7 @@ function populateMedicamentosTable(medicamentos) {
         let actionsHtml = '';
 
         actionsHtml += `
-                <a class="btn btn-sm me-1" style="background-color: #44C1F2; border-color: #44C1F2; color: white;" href="EditarMedicamento.html?id=${medicamento.id_medicamento}" title="Editar">
+                <a class="btn btn-sm me-1" style="background-color: #44C1F2; border-color: #44C1F2; color: white;" href="EditarMedicamento.php?id=${medicamento.id_medicamento}" title="Editar">
                     <i class="fas fa-edit"></i> 
                 </a>
             `;
@@ -213,7 +213,7 @@ function deshabilitarMedicamento() {
     const medicamentoId = window.currentMedicamentoId;
 
     if (!medicamentoId) {
-        alert('Error: No se encontró el medicamento a deshabilitar');
+        alert('Error: No se encontró el medicamento a deshabilitar.');
         return;
     }
 
@@ -229,16 +229,16 @@ function deshabilitarMedicamento() {
         dataType: 'json',
         success: function (response) {
             if (response.status === 'success') {
-                alert('Medicamento deshabilitado exitosamente');
+                alert('Medicamento deshabilitado exitosamente.');
                 $('#modalConfirmacion').modal('hide');
                 loadMedicamentos();
             } else {
-                alert(response.message || 'Error al deshabilitar el medicamento');
+                alert(response.message || 'Error al deshabilitar medicamento.');
             }
         },
         error: function (xhr, status, error) {
             console.error('Error al deshabilitar medicamento:', error, xhr.responseText);
-            alert('Error de conexión al deshabilitar el medicamento');
+            alert('Error de conexión al deshabilitar medicamento.');
         }
     });
 }
@@ -260,15 +260,15 @@ function enableMedicamento(medicamentoId) {
         dataType: 'json',
         success: function (response) {
             if (response.status === 'success') {
-                alert('Medicamento habilitado exitosamente');
+                alert('Medicamento habilitado exitosamente.');
                 loadMedicamentos();
             } else {
-                alert(response.message || 'Error al habilitar el medicamento');
+                alert(response.message || 'Error al habilitar medicamento.');
             }
         },
         error: function (xhr, status, error) {
             console.error('Error al habilitar medicamento:', error, xhr.responseText);
-            alert('Error de conexión al habilitar el medicamento');
+            alert('Error de conexión al habilitar medicamento.');
         }
     });
 }
@@ -443,12 +443,12 @@ function determineRouterUrl(action) {
 
 function populateSelect(select, data, valueField, textField) {
     if (!select || select.length === 0) {
-        console.warn('Select no encontrado para poblar');
+        console.warn('Select no encontrado para poblar.');
         return;
     }
 
     const currentValue = select.val();
-    select.empty().append('<option value="">-- Selecciona --</option>');
+    select.empty().append('<option value="">-- Seleccione --</option>');
 
     if (data && Array.isArray(data)) {
         data.forEach(item => {
@@ -476,7 +476,7 @@ function handleMedicamentoSubmit(e) {
     console.log('Datos del formulario:', formData);
 
     if (!formData.nombre || !formData.id_forma_farmaceutica || !formData.id_grupo_terapeutico || !formData.id_via_administracion) {
-        alert('Por favor completa todos los campos obligatorios');
+        alert('Por favor complete todos los campos obligatorios.');
         return;
     }
 
@@ -491,7 +491,7 @@ function handleMedicamentoSubmit(e) {
         success: function (response) {
             console.log('Respuesta del servidor:', response);
             if (response.status === 'success') {
-                alert('Medicamento registrado exitosamente');
+                alert('Medicamento registrado exitosamente.');
 
                 $('#form-registro')[0].reset();
                 $('#forma-farmaceutica, #grupo-terapeutico, #via-administracion, #estado').val('');
@@ -500,12 +500,12 @@ function handleMedicamentoSubmit(e) {
                     window.location.href = 'Medicamentos.php';
                 }, 1000);
             } else {
-                alert(response.message || 'Error al registrar el medicamento');
+                alert(response.message || 'Error al registrar medicamento.');
             }
         },
         error: function (xhr, status, error) {
             console.error('Error AJAX:', error, xhr.responseText);
-            alert('Error de conexión con el servidor. Revisa la consola para más detalles.');
+            alert('Error de conexión con el servidor. Revise la consola para más detalles.');
         }
     });
 }
@@ -515,7 +515,7 @@ function handleMedicamentoUpdate(e) {
     console.log('Actualizando medicamento...');
 
     if (!editingMedicamentoId) {
-        alert('Error: No se encontró el ID del medicamento a actualizar');
+        alert('Error: No se encontró el ID del medicamento a actualizar.');
         return;
     }
 
@@ -531,7 +531,7 @@ function handleMedicamentoUpdate(e) {
     console.log('Datos de actualización:', formData);
 
     if (!formData.nombre || !formData.id_forma_farmaceutica || !formData.id_grupo_terapeutico || !formData.id_via_administracion) {
-        alert('Por favor completa todos los campos obligatorios');
+        alert('Por favor complete todos los campos obligatorios.');
         return;
     }
 
@@ -546,18 +546,18 @@ function handleMedicamentoUpdate(e) {
         success: function (response) {
             console.log('Respuesta del servidor:', response);
             if (response.status === 'success') {
-                alert('Medicamento actualizado exitosamente');
+                alert('Medicamento actualizado exitosamente.');
 
                 setTimeout(() => {
                     window.location.href = 'Medicamentos.php';
                 }, 1000);
             } else {
-                alert(response.message || 'Error al actualizar el medicamento');
+                alert(response.message || 'Error al actualizar medicamento.');
             }
         },
         error: function (xhr, status, error) {
             console.error('Error AJAX:', error, xhr.responseText);
-            alert('Error de conexión con el servidor. Revisa la consola para más detalles.');
+            alert('Error de conexión con el servidor. Revise la consola para más detalles.');
         }
     });
 }

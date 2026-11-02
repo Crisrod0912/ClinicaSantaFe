@@ -21,7 +21,7 @@ function cargarMisEspecialidades() {
         },
         error: function (xhr, status, error) {
             console.error('Error al cargar especialidades:', error);
-            $('.custom-table tbody').html('<tr><td colspan="3" class="text-center">Error al cargar las especialidades</td></tr>');
+            $('.custom-table tbody').html('<tr><td colspan="3" class="text-center">Error al cargar especialidades</td></tr>');
         }
     });
 }
@@ -30,7 +30,7 @@ function mostrarEspecialidades(especialidades) {
     let html = '';
 
     if (especialidades.length === 0) {
-        html = '<tr><td colspan="3" class="text-center">No tienes especialidades asignadas</td></tr>';
+        html = '<tr><td colspan="3" class="text-center">No tiene especialidades asignadas</td></tr>';
     } else {
         especialidades.forEach(function (especialidad) {
             html += `

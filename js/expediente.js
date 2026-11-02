@@ -28,12 +28,12 @@ function cargarExpediente() {
                 llenarFormulario(data.data);
             } else {
                 console.error('Error del servidor:', data.message);
-                mostrarError('Error al cargar el expediente: ' + data.message);
+                mostrarError('Error al cargar expediente: ' + data.message);
             }
         })
         .catch(error => {
             console.error('Error de conexión:', error);
-            mostrarError('Error de conexión al cargar el expediente. Verifique su conexión a internet.');
+            mostrarError('Error de conexión al cargar expediente. Verifique su conexión a internet.');
         });
 }
 
@@ -59,7 +59,7 @@ function llenarFormulario(data) {
 
     } catch (error) {
         console.error('Error al llenar formulario:', error);
-        mostrarError('Error al mostrar la información del expediente');
+        mostrarError('Error al mostrar la información del expediente.');
     }
 }
 
@@ -73,7 +73,7 @@ function setValue(fieldId, value) {
 function actualizarExpediente() {
     const form = document.getElementById('expedienteForm');
     if (!form) {
-        console.error('Formulario de expediente no encontrado');
+        console.error('Formulario de expediente no encontrado.');
         return;
     }
 
@@ -100,9 +100,9 @@ function actualizarExpediente() {
         })
         .then(data => {
             if (data.status === 'success') {
-                mostrarExito('Expediente actualizado exitosamente');
+                mostrarExito('Expediente actualizado exitosamente.');
                 setTimeout(() => {
-                    window.location.href = 'Expediente.html';
+                    window.location.href = 'Expediente.php';
                 }, 1500);
             } else {
                 mostrarError('Error: ' + data.message);
@@ -110,7 +110,7 @@ function actualizarExpediente() {
         })
         .catch(error => {
             console.error('Error de conexión:', error);
-            mostrarError('Error de conexión al actualizar el expediente. Intente nuevamente.');
+            mostrarError('Error de conexión al actualizar expediente. Intente nuevamente.');
         })
         .finally(() => {
             submitBtn.textContent = originalText;
@@ -122,14 +122,14 @@ function validarFormulario(form) {
     const correo = form.querySelector('[name="correo"]');
 
     if (!correo || !correo.value.trim()) {
-        mostrarError('El correo electrónico es requerido');
+        mostrarError('El correo electrónico es requerido.');
         correo?.focus();
         return false;
     }
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(correo.value.trim())) {
-        mostrarError('Por favor ingrese un correo electrónico válido');
+        mostrarError('Por favor ingrese un correo electrónico válido.');
         correo.focus();
         return false;
     }

@@ -22,7 +22,7 @@ function cargarExpedientes() {
         })
         .catch(error => {
             console.error('Error de conexión:', error);
-            mostrarError('Error de conexión al cargar expedientes');
+            mostrarError('Error de conexión al cargar expedientes.');
         });
 }
 
@@ -33,7 +33,7 @@ function mostrarExpedientes(expedientes) {
     if (expedientes.length === 0) {
         tbody.innerHTML = `
             <tr>
-                <td colspan="3" class="text-center">No hay expedientes disponibles</td>
+                <td colspan="3" class="text-center">No hay expedientes disponibles.</td>
             </tr>
         `;
         return;

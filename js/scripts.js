@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", function () {
         email.addEventListener("blur", () => {
             clearError(email);
             if (email.value.trim() && !email.value.includes("@")) {
-                showError(email, "Correo inválido");
+                showError(email, "Correo inválido.");
             }
         });
     } else if (pageType === "cita") {
@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", function () {
         ced.addEventListener("blur", () => {
             clearError(ced);
             if (!ced.value.trim() || isNaN(ced.value.trim())) {
-                showError(ced, "Cédula inválida");
+                showError(ced, "Cédula inválida.");
             }
         });
     }
@@ -41,7 +41,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     .forEach(id => {
                         const el = document.getElementById(id);
                         if (!el.value.trim()) {
-                            showError(el, "Campo obligatorio");
+                            showError(el, "Campo obligatorio.");
                             valid = false;
                         }
                     });
@@ -53,7 +53,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     .forEach(id => {
                         const el = document.getElementById(id);
                         if (!el.value.trim()) {
-                            showError(el, "Campo obligatorio");
+                            showError(el, "Campo obligatorio.");
                             valid = false;
                         }
                     });
@@ -63,7 +63,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         hoy = new Date();
                     hoy.setHours(0, 0, 0, 0);
                     if (sel < hoy) {
-                        showError(document.getElementById("fecha"), "Fecha inválida");
+                        showError(document.getElementById("fecha"), "Fecha inválida.");
                         valid = false;
                     }
                 }
@@ -74,7 +74,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     .forEach(id => {
                         const el = document.getElementById(id);
                         if (!el.value.trim()) {
-                            showError(el, "Campo obligatorio");
+                            showError(el, "Campo obligatorio.");
                             valid = false;
                         }
                     });
@@ -86,7 +86,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     .forEach(id => {
                         const el = document.getElementById(id);
                         if (!el.value.trim()) {
-                            showError(el, "Campo obligatorio");
+                            showError(el, "Campo obligatorio.");
                             valid = false;
                         }
                     });
@@ -97,14 +97,14 @@ document.addEventListener("DOMContentLoaded", function () {
                     .forEach(id => {
                         const el = document.getElementById(id);
                         if (!el.value.trim()) {
-                            showError(el, "Campo obligatorio");
+                            showError(el, "Campo obligatorio.");
                             valid = false;
                         }
                     });
                 const checks = Array.from(document.querySelectorAll("input[name='grupo']"));
                 if (!checks.some(c => c.checked)) {
                     const container = document.querySelector(".checkbox-group");
-                    showError(container, "Selecciona al menos un grupo");
+                    showError(container, "Selecciona al menos un grupo.");
                     valid = false;
                 }
                 break;
@@ -141,7 +141,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function onSubmitRegistro(event) {
     event.preventDefault();
-    console.log('Formulario de registro enviado');
+    console.log('Formulario de registro enviado.');
 
     document.querySelectorAll('.error-message').forEach(el => el.remove());
 
@@ -162,7 +162,7 @@ function onSubmitRegistro(event) {
     for (const [fieldName, label] of Object.entries(requiredFields)) {
         const value = formData.get(fieldName);
         if (!value || value.trim() === '') {
-            showErrorByFieldName(fieldName, `${label} es obligatorio`);
+            showErrorByFieldName(fieldName, `${label} es obligatorio.`);
             hasErrors = true;
         }
     }
@@ -171,13 +171,13 @@ function onSubmitRegistro(event) {
     const confirmPassword = formData.get('confirm_password');
 
     if (password && confirmPassword && password !== confirmPassword) {
-        showErrorByFieldName('confirm_password', 'Las contraseñas no coinciden');
+        showErrorByFieldName('confirm_password', 'Las contraseñas no coinciden.');
         hasErrors = true;
     }
 
     const email = formData.get('email');
     if (email && !email.includes('@')) {
-        showErrorByFieldName('email', 'El formato del correo es inválido');
+        showErrorByFieldName('email', 'El formato del correo es inválido.');
         hasErrors = true;
     }
 
@@ -227,16 +227,16 @@ function onSubmitRegistro(event) {
         .then(data => {
             console.log('Datos de respuesta:', data);
             if (data.success) {
-                alert('¡Registro exitoso! Ahora puedes iniciar sesión.');
+                alert('¡Registro exitoso! Ahora puede iniciar sesión.');
                 event.target.reset();
                 window.location.href = 'Login.php';
             } else {
-                alert('Error en el registro: ' + (data.message || 'Error desconocido'));
+                alert('Error en el registro: ' + (data.message || 'Error desconocido.'));
             }
         })
         .catch(error => {
             console.error('Error:', error);
-            alert('Error de conexión. Por favor, intenta de nuevo.');
+            alert('Error de conexión. Por favor, intente de nuevo.');
         });
 }
 

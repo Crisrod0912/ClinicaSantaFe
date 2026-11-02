@@ -4,7 +4,7 @@ let availableDoctors = [];
 document.addEventListener("DOMContentLoaded", function () {
     function checkJquery() {
         if (typeof $ !== 'undefined' && typeof $.ajax !== 'undefined') {
-            console.log('jQuery cargado correctamente');
+            console.log('jQuery cargado correctamente.');
             initializePage();
             setupEventListeners();
             return true;
@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 clearInterval(retryInterval);
             } else if (attempts >= maxAttempts) {
                 clearInterval(retryInterval);
-                console.error('No se pudo cargar jQuery después de múltiples intentos');
+                console.error('No se pudo cargar jQuery después de múltiples intentos.');
                 showErrorMessage('Error: No se pudo cargar jQuery. Recarga la página.');
             }
         }, 200);
@@ -45,15 +45,15 @@ function initializePage() {
     const currentPage = window.location.pathname;
     const fileName = currentPage.split('/').pop();
 
-    if (fileName === 'RegistrarCita.html') {
-        console.log('Detectado formulario de registro admin');
+    if (fileName === 'RegistrarCita.php') {
+        console.log('Detectado formulario de registro admin.');
         loadFormData();
         setupDateRestrictions();
         initializeCalendar();
     }
 
-    else if (fileName === 'EditarCita.html' || fileName === 'EditarCita.html') {
-        console.log('Detectado formulario de actualización admin');
+    else if (fileName === 'EditarCita.php' || fileName === 'EditarCita.php') {
+        console.log('Detectado formulario de actualización admin.');
         loadFormData();
         setupDateRestrictions();
         initializeCalendar();
@@ -61,14 +61,14 @@ function initializePage() {
     }
 
     else if (fileName === 'Citas.php' || document.querySelector('.custom-table')) {
-        console.log('Detectada tabla de citas admin');
+        console.log('Detectada tabla de citas admin.');
         loadAllAppointments();
     }
 }
 
 function setupEventListeners() {
     if (typeof $ === 'undefined') {
-        console.error('jQuery no disponible para event listeners');
+        console.error('jQuery no disponible para event listeners.');
         return;
     }
 
@@ -121,7 +121,7 @@ function initializeCalendar() {
             hoy.setHours(0, 0, 0, 0);
 
             if (fechaClick < hoy) {
-                alert('No puedes seleccionar una fecha pasada');
+                alert('No puede seleccionar una fecha pasada.');
                 return;
             }
 
@@ -163,7 +163,7 @@ function loadSpecialties() {
                 responseText: xhr.responseText,
                 statusCode: xhr.status
             });
-            showErrorMessage('Error al cargar especialidades. Verifica la conexión.');
+            showErrorMessage('Error al cargar especialidades. Verificar conexión.');
         }
     });
 }
@@ -189,7 +189,7 @@ function loadServices() {
                 responseText: xhr.responseText,
                 statusCode: xhr.status
             });
-            showErrorMessage('Error al cargar servicios. Verifica la conexión.');
+            showErrorMessage('Error al cargar servicios. Verificar conexión.');
         }
     });
 }
@@ -199,7 +199,7 @@ function loadCitaForEditing() {
     const citaId = urlParams.get('id');
 
     if (!citaId) {
-        alert('Error: No se especificó qué cita editar');
+        alert('Error: No se especificó qué cita editar.');
         window.location.href = 'Citas.php';
         return;
     }
@@ -231,7 +231,7 @@ function loadCitaForEditing() {
                 error: error,
                 responseText: xhr.responseText
             });
-            alert('Error de conexión al cargar la cita');
+            alert('Error de conexión al cargar cita.');
             window.location.href = 'Citas.php';
         }
     });
@@ -297,7 +297,7 @@ function fillFormWithCitaData(cita) {
             });
 
             if (!horaEncontrada) {
-                console.error('No se pudo encontrar la hora en las opciones disponibles');
+                console.error('No se pudo encontrar la hora en las opciones disponibles.');
                 console.error('Hora buscada:', horaParaSelect);
                 console.error('Opciones disponibles:', $('#hora option').map(function () { return this.value; }).get());
             }
@@ -317,7 +317,7 @@ function fillFormWithCitaData(cita) {
         console.log('Hora texto:', $('#hora option:selected').text());
 
         if (!$('#hora').val() && cita.hora) {
-            console.error('❌ PROBLEMA: La hora no se seleccionó correctamente');
+            console.error('❌ PROBLEMA: La hora no se seleccionó correctamente.');
             console.error('Hora original:', cita.hora);
             console.error('Intentando selección manual...');
 
@@ -376,7 +376,7 @@ function verificarDatosCompletos(citaOriginal) {
     if (camposFaltantes.length > 0) {
         console.warn('Campos que se tuvieron que rellenar manualmente:', camposFaltantes);
     } else {
-        console.log('✅ Todos los datos se cargaron correctamente');
+        console.log('✅ Todos los datos se cargaron correctamente.');
     }
 }
 
@@ -391,7 +391,7 @@ function handleUpdateCitaAdmin(e) {
     console.log('Actualizando cita como admin...');
 
     if (!editingCitaId) {
-        alert('Error: No se encontró el ID de la cita a actualizar');
+        alert('Error: No se encontró el ID de la cita a actualizar.');
         return;
     }
 
@@ -409,7 +409,7 @@ function handleUpdateCitaAdmin(e) {
 
     if (!formData.fecha || !formData.hora || !formData.cedula_paciente ||
         !formData.id_servicio || !formData.id_especialidad) {
-        alert('Por favor completa todos los campos obligatorios');
+        alert('Por favor complete todos los campos obligatorios.');
         console.error('Campos faltantes:', {
             fecha: !formData.fecha,
             hora: !formData.hora,
@@ -421,9 +421,9 @@ function handleUpdateCitaAdmin(e) {
     }
 
     if ($('#nombre-paciente').hasClass('is-invalid') ||
-        $('#nombre-paciente').val() === 'Paciente no encontrado' ||
+        $('#nombre-paciente').val() === 'Paciente no encontrado.' ||
         $('#nombre-paciente').val() === '') {
-        alert('Por favor ingresa una cédula de paciente válida');
+        alert('Por favor ingrese una cédula de paciente válida.');
         return;
     }
 
@@ -443,12 +443,12 @@ function handleUpdateCitaAdmin(e) {
             $('.btn-register').prop('disabled', false).text('Actualizar Cita');
 
             if (response.status === 'success') {
-                alert('Cita actualizada exitosamente');
+                alert('Cita actualizada exitosamente.');
                 setTimeout(() => {
                     window.location.href = 'Citas.php';
                 }, 1000);
             } else {
-                alert(response.message || 'Error al actualizar la cita');
+                alert(response.message || 'Error al actualizar cita.');
                 console.error('Error del servidor:', response);
             }
         },
@@ -461,15 +461,15 @@ function handleUpdateCitaAdmin(e) {
                 readyState: xhr.readyState
             });
 
-            $('.btn-register').prop('disabled', false).text('Actualizar Cita');
+            $('.btn-register').prop('disabled', false).text('Actualizar Cita.');
 
             console.error('Respuesta completa del servidor:');
             console.error(xhr.responseText);
 
-            let errorMessage = 'Error de conexión con el servidor';
+            let errorMessage = 'Error de conexión con el servidor.';
 
             if (xhr.status === 200 && xhr.responseText.includes('<br />')) {
-                errorMessage = 'Error en el servidor PHP. Revisa los logs del servidor.';
+                errorMessage = 'Error en el servidor PHP. Revise los logs del servidor.';
 
                 const phpErrorMatch = xhr.responseText.match(/Fatal error[^<]*/);
                 if (phpErrorMatch) {
@@ -481,11 +481,11 @@ function handleUpdateCitaAdmin(e) {
                 console.error(xhr.responseText.substring(0, 500));
 
             } else if (xhr.status === 404) {
-                errorMessage = 'Archivo router.php no encontrado';
+                errorMessage = 'Archivo router.php no encontrado.';
             } else if (xhr.status === 500) {
-                errorMessage = 'Error interno del servidor (500)';
+                errorMessage = 'Error interno del servidor (500).';
             } else if (xhr.status === 0) {
-                errorMessage = 'No se pudo conectar al servidor';
+                errorMessage = 'No se pudo conectar al servidor.';
             }
 
             alert(errorMessage);
@@ -520,7 +520,7 @@ function debugFormDataBeforeSend() {
         method: 'GET',
         timeout: 3000,
         success: function (response) {
-            console.log('✅ Conectividad con router OK');
+            console.log('✅ Conectividad con router OK.');
         },
         error: function (xhr) {
             console.error('❌ Problema de conectividad:', xhr.status, xhr.statusText);
@@ -588,7 +588,7 @@ function clearPatientInfo() {
 }
 
 function showPatientNotFound() {
-    $('#nombre-paciente').val('Paciente no encontrado');
+    $('#nombre-paciente').val('Paciente no encontrado.');
     $('#nombre-paciente').addClass('is-invalid');
     $('#cedula-paciente').addClass('is-invalid');
 }
@@ -621,9 +621,9 @@ function updateAvailableDoctors() {
 
                 if (availableDoctors.length === 0) {
                     if (!editingCitaId) {
-                        alert('No hay médicos disponibles en este horario. Por favor selecciona otro.');
+                        alert('No hay médicos disponibles en este horario. Por favor seleccione otro.');
                     } else {
-                        console.warn('No hay médicos disponibles para este horario');
+                        console.warn('No hay médicos disponibles para este horario.');
                     }
                 } else {
                     console.log('✓ Médicos disponibles para este horario:', availableDoctors.length);
@@ -642,7 +642,7 @@ function updateAvailableDoctors() {
             availableDoctors = [];
 
             if (!editingCitaId) {
-                console.error('No se pudo verificar la disponibilidad de médicos');
+                console.error('No se pudo verificar la disponibilidad de los médicos.');
             }
         }
     });
@@ -664,17 +664,17 @@ function handleCreateCitaAdmin(e) {
 
     if (!formData.fecha || !formData.hora || !formData.cedula_paciente ||
         !formData.id_servicio || !formData.id_especialidad) {
-        alert('Por favor completa todos los campos obligatorios');
+        alert('Por favor complete todos los campos obligatorios.');
         return;
     }
 
-    if ($('#nombre-paciente').hasClass('is-invalid') || $('#nombre-paciente').val() === 'Paciente no encontrado') {
-        alert('Por favor ingresa una cédula de paciente válida');
+    if ($('#nombre-paciente').hasClass('is-invalid') || $('#nombre-paciente').val() === 'Paciente no encontrado.') {
+        alert('Por favor ingrese una cédula de paciente válida.');
         return;
     }
 
     if (availableDoctors.length === 0) {
-        alert('No hay médicos disponibles para esta fecha y hora. Por favor selecciona otro horario.');
+        alert('No hay médicos disponibles para esta fecha y hora. Por favor seleccione otro horario.');
         return;
     }
 
@@ -687,7 +687,7 @@ function handleCreateCitaAdmin(e) {
         success: function (response) {
             console.log('Respuesta del servidor:', response);
             if (response.status === 'success') {
-                alert('Cita registrada exitosamente');
+                alert('Cita registrada exitosamente.');
                 clearForm();
 
                 if (window.location.pathname.includes('Citas.php')) {
@@ -698,7 +698,7 @@ function handleCreateCitaAdmin(e) {
                     }, 1000);
                 }
             } else {
-                alert(response.message || 'Error al registrar la cita');
+                alert(response.message || 'Error al registrar cita.');
             }
         },
         error: function (xhr, status, error) {
@@ -708,7 +708,7 @@ function handleCreateCitaAdmin(e) {
                 responseText: xhr.responseText,
                 statusCode: xhr.status
             });
-            alert('Error de conexión con el servidor. Verifica que el servidor esté funcionando.');
+            alert('Error de conexión con el servidor. Verifique que el servidor esté funcionando.');
         }
     });
 }
@@ -731,23 +731,23 @@ function loadAllAppointments() {
             if (response.status === 'success') {
                 populateAdminAppointmentsTable(response.data);
             } else {
-                $('.custom-table tbody').html('<tr><td colspan="9" class="text-center">No se pudieron cargar las citas</td></tr>');
+                $('.custom-table tbody').html('<tr><td colspan="9" class="text-center">No se pudieron cargar las citas.</td></tr>');
                 console.error('Error en respuesta:', response);
             }
         },
         error: function (xhr, status, error) {
-            console.error('Error al cargar citas:', {
+            console.error('Error al cargar las citas:', {
                 status: status,
                 error: error,
                 responseText: xhr.responseText,
                 statusCode: xhr.status
             });
 
-            let errorMessage = 'Error al cargar las citas';
+            let errorMessage = 'Error al cargar las citas.';
             if (xhr.status === 404) {
-                errorMessage += ' - Archivo router.php no encontrado';
+                errorMessage += ' - Archivo router.php no encontrado.';
             } else if (xhr.status === 500) {
-                errorMessage += ' - Error del servidor';
+                errorMessage += ' - Error del servidor.';
             }
 
             $('.custom-table tbody').html(`<tr><td colspan="9" class="text-center text-danger">${errorMessage}</td></tr>`);
@@ -763,7 +763,7 @@ function populateAdminAppointmentsTable(citas) {
     }
 
     if (!citas || citas.length === 0) {
-        $('.custom-table tbody').html('<tr><td colspan="9" class="text-center">No hay citas registradas</td></tr>');
+        $('.custom-table tbody').html('<tr><td colspan="9" class="text-center">No hay citas registradas.</td></tr>');
         return;
     }
 
@@ -810,7 +810,7 @@ function populateAdminAppointmentsTable(citas) {
 
 function editAppointmentAdmin(citaId) {
     console.log('Redirigiendo a editar cita admin:', citaId);
-    window.location.href = `EditarCita.html?id=${citaId}`;
+    window.location.href = `EditarCita.php?id=${citaId}`;
 }
 
 function cancelAppointmentAdmin(citaId) {
@@ -828,15 +828,15 @@ function cancelAppointmentAdmin(citaId) {
         dataType: 'json',
         success: function (response) {
             if (response.status === 'success') {
-                alert('Cita cancelada exitosamente');
+                alert('Cita cancelada exitosamente.');
                 loadAllAppointments();
             } else {
-                alert(response.message || 'Error al cancelar la cita');
+                alert(response.message || 'Error al cancelar cita.');
             }
         },
         error: function (xhr, status, error) {
             console.error('Error al cancelar cita:', error);
-            alert('Error de conexión al cancelar la cita');
+            alert('Error de conexión al cancelar cita.');
         }
     });
 }

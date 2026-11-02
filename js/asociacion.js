@@ -1,7 +1,7 @@
 let editingMedicoEspecialidadId = null;
 
 if (typeof $ === 'undefined') {
-    console.error('jQuery no está cargado');
+    console.error('jQuery no está cargado.');
 }
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -26,26 +26,26 @@ function initializePage() {
     const currentPage = window.location.pathname;
     const fileName = currentPage.split('/').pop();
 
-    if (fileName === 'RegistrarAsociacion.html') {
-        console.log('Detectado formulario de registro de asignación');
+    if (fileName === 'RegistrarAsociacion.php') {
+        console.log('Detectado formulario de registro de asignación.');
         loadFormData();
     }
 
-    else if (fileName === 'EditarAsociacion.html') {
-        console.log('Detectado formulario de actualización de asignación');
+    else if (fileName === 'EditarAsociacion.php') {
+        console.log('Detectado formulario de actualización de asignación.');
         loadFormData();
         loadMedicoEspecialidadForEditing();
     }
 
     else if (fileName === 'Asociacion.php' || fileName === 'MedicoEspecialidad.php' || document.querySelector('.custom-table')) {
-        console.log('Detectada tabla de asignaciones médico-especialidad');
+        console.log('Detectada tabla de asignaciones médico-especialidad.');
         loadMedicoEspecialidades();
     }
 }
 
 function setupEventListeners() {
     if (typeof $ === 'undefined') {
-        console.error('jQuery no disponible para event listeners');
+        console.error('jQuery no disponible para event listeners.');
         return;
     }
 
@@ -70,7 +70,7 @@ function loadMedicoEspecialidadForEditing() {
     const medicoEspecialidadId = urlParams.get('id');
 
     if (!medicoEspecialidadId) {
-        alert('Error: No se especificó qué asignación editar');
+        alert('Error: No se especificó qué asignación editar.');
         window.location.href = 'Asociacion.php';
         return;
     }
@@ -92,14 +92,14 @@ function loadMedicoEspecialidadForEditing() {
                     fillFormWithMedicoEspecialidadData(response.data);
                 }, 1000);
             } else {
-                alert('Error al cargar los datos de la asignación');
+                alert('Error al cargar los datos de asignación.');
                 window.location.href = 'Asociacion.php';
             }
         },
         error: function (xhr, status, error) {
             hideLoadingOverlay();
             console.error('Error al cargar asignación:', error);
-            alert('Error de conexión al cargar la asignación');
+            alert('Error de conexión al cargar asignación.');
             window.location.href = 'Asociacion.php';
         }
     });
@@ -150,12 +150,12 @@ function loadMedicoEspecialidades() {
             if (response.status === 'success') {
                 populateMedicoEspecialidadTable(response.data);
             } else {
-                $('.custom-table tbody').html('<tr><td colspan="5" class="text-center">No se pudieron cargar las asignaciones</td></tr>');
+                $('.custom-table tbody').html('<tr><td colspan="5" class="text-center">No se pudieron cargar las asignaciones.</td></tr>');
             }
         },
         error: function (xhr, status, error) {
             console.error('Error al cargar asignaciones:', error, xhr.responseText);
-            $('.custom-table tbody').html('<tr><td colspan="5" class="text-center">Error al cargar las asignaciones</td></tr>');
+            $('.custom-table tbody').html('<tr><td colspan="5" class="text-center">Error al cargar asignaciones.</td></tr>');
         }
     });
 }
@@ -164,7 +164,7 @@ function populateMedicoEspecialidadTable(asignaciones) {
     const tbody = $('.custom-table tbody');
 
     if (!asignaciones || asignaciones.length === 0) {
-        tbody.html('<tr><td colspan="5" class="text-center">No hay asignaciones registradas</td></tr>');
+        tbody.html('<tr><td colspan="5" class="text-center">No hay asignaciones registradas.</td></tr>');
         return;
     }
 
@@ -173,7 +173,7 @@ function populateMedicoEspecialidadTable(asignaciones) {
         let actionsHtml = '';
 
         actionsHtml += `
-                <a class="btn btn-sm me-1" style="background-color: #44C1F2; border-color: #44C1F2; color: white;" href="EditarAsociacion.html?id=${asignacion.id_medico_especialidad}" title="Editar">
+                <a class="btn btn-sm me-1" style="background-color: #44C1F2; border-color: #44C1F2; color: white;" href="EditarAsociacion.php?id=${asignacion.id_medico_especialidad}" title="Editar">
                     <i class="fas fa-edit"></i>
                 </a>
             `;
@@ -223,15 +223,15 @@ function disableMedicoEspecialidad(medicoEspecialidadId) {
         dataType: 'json',
         success: function (response) {
             if (response.status === 'success') {
-                alert('Asignación deshabilitada exitosamente');
+                alert('Asignación deshabilitada exitosamente.');
                 loadMedicoEspecialidades();
             } else {
-                alert(response.message || 'Error al deshabilitar la asignación');
+                alert(response.message || 'Error al deshabilitar asignación.');
             }
         },
         error: function (xhr, status, error) {
             console.error('Error al deshabilitar asignación:', error);
-            alert('Error de conexión al deshabilitar la asignación');
+            alert('Error de conexión al deshabilitar asignación.');
         }
     });
 }
@@ -253,15 +253,15 @@ function enableMedicoEspecialidad(medicoEspecialidadId) {
         dataType: 'json',
         success: function (response) {
             if (response.status === 'success') {
-                alert('Asignación habilitada exitosamente');
+                alert('Asignación habilitada exitosamente.');
                 loadMedicoEspecialidades();
             } else {
-                alert(response.message || 'Error al habilitar la asignación');
+                alert(response.message || 'Error al habilitar asignación.');
             }
         },
         error: function (xhr, status, error) {
             console.error('Error al habilitar asignación:', error);
-            alert('Error de conexión al habilitar la asignación');
+            alert('Error de conexión al habilitar asignación.');
         }
     });
 }
@@ -293,7 +293,7 @@ function getStatusBadgeClass(estadoId) {
 }
 
 function deshabilitarMedicoEspecialidad() {
-    console.log('Función deshabilitarMedicoEspecialidad llamada desde modal');
+    console.log('Función deshabilitarMedicoEspecialidad llamada desde modal.');
 }
 
 window.disableMedicoEspecialidad = disableMedicoEspecialidad;
@@ -384,12 +384,12 @@ function determineRouterUrl(action) {
 
 function populateSelect(select, data, valueField, textField) {
     if (!select || select.length === 0) {
-        console.warn('Select no encontrado para poblar');
+        console.warn('Select no encontrado para poblar.');
         return;
     }
 
     const currentValue = select.val();
-    select.empty().append('<option value="">-- Selecciona --</option>');
+    select.empty().append('<option value="">-- Seleccione --</option>');
 
     if (data && Array.isArray(data)) {
         data.forEach(item => {
@@ -415,7 +415,7 @@ function handleMedicoEspecialidadSubmit(e) {
     console.log('Datos del formulario:', formData);
 
     if (!formData.id_medico || !formData.id_especialidad || !formData.id_estado) {
-        alert('Por favor completa todos los campos obligatorios');
+        alert('Por favor complete todos los campos obligatorios.');
         return;
     }
 
@@ -430,7 +430,7 @@ function handleMedicoEspecialidadSubmit(e) {
         success: function (response) {
             console.log('Respuesta del servidor:', response);
             if (response.status === 'success') {
-                alert('Especialidad asignada exitosamente');
+                alert('Especialidad asignada exitosamente.');
 
                 $('#medico, #especialidad, #estado').val('');
 
@@ -438,12 +438,12 @@ function handleMedicoEspecialidadSubmit(e) {
                     window.location.href = 'Asociacion.php';
                 }, 1000);
             } else {
-                alert(response.message || 'Error al asignar la especialidad');
+                alert(response.message || 'Error al asignar especialidad.');
             }
         },
         error: function (xhr, status, error) {
             console.error('Error AJAX:', error, xhr.responseText);
-            alert('Error de conexión con el servidor. Revisa la consola para más detalles.');
+            alert('Error de conexión con el servidor. Revise la consola para más detalles.');
         }
     });
 }
@@ -467,7 +467,7 @@ function handleMedicoEspecialidadUpdate(e) {
     console.log('Datos de actualización:', formData);
 
     if (!formData.id_medico || !formData.id_especialidad || !formData.id_estado) {
-        alert('Por favor completa todos los campos obligatorios');
+        alert('Por favor complete todos los campos obligatorios.');
         return;
     }
 
@@ -482,18 +482,18 @@ function handleMedicoEspecialidadUpdate(e) {
         success: function (response) {
             console.log('Respuesta del servidor:', response);
             if (response.status === 'success') {
-                alert('Asignación actualizada exitosamente');
+                alert('Asignación actualizada exitosamente.');
 
                 setTimeout(() => {
                     window.location.href = 'Asociacion.php';
                 }, 1000);
             } else {
-                alert(response.message || 'Error al actualizar la asignación');
+                alert(response.message || 'Error al actualizar asignación.');
             }
         },
         error: function (xhr, status, error) {
             console.error('Error AJAX:', error, xhr.responseText);
-            alert('Error de conexión con el servidor. Revisa la consola para más detalles.');
+            alert('Error de conexión con el servidor. Revise la consola para más detalles.');
         }
     });
 }

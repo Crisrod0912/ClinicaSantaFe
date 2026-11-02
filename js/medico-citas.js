@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function () {
     if (typeof $ === 'undefined') {
-        console.error('jQuery no está cargado');
+        console.error('jQuery no está cargado.');
         return;
     }
 
@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 function loadMedicoCitas() {
     if (typeof $ === 'undefined') {
-        console.error('jQuery no disponible para AJAX');
+        console.error('jQuery no disponible para AJAX.');
         return;
     }
 
@@ -37,7 +37,7 @@ function loadMedicoCitas() {
                 if (jsonData.status === 'success') {
                     populateTable(jsonData.data);
                 } else {
-                    $('.custom-table tbody').html('<tr><td colspan="5" class="text-center text-danger">' + (jsonData.message || 'Error al cargar citas') + '</td></tr>');
+                    $('.custom-table tbody').html('<tr><td colspan="5" class="text-center text-danger">' + (jsonData.message || 'Error al cargar citas.') + '</td></tr>');
                 }
             } catch (e) {
                 console.error('JSON parse error:', e);
@@ -55,7 +55,7 @@ function populateTable(citas) {
     const tbody = $('.custom-table tbody');
 
     if (!citas || citas.length === 0) {
-        tbody.html('<tr><td colspan="5" class="text-center">No tienes citas programadas</td></tr>');
+        tbody.html('<tr><td colspan="5" class="text-center">No tienes citas programadas.</td></tr>');
         return;
     }
 

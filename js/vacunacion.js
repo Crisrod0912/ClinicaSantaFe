@@ -42,11 +42,11 @@ function cargarVacunaciones() {
                     mostrarVacunaciones(response.data);
                 } else {
                     console.warn('Datos no válidos recibidos:', response.data);
-                    $('#vacunasTableBody').html('<tr><td colspan="6" class="text-center">No hay datos válidos para mostrar</td></tr>');
+                    $('#vacunasTableBody').html('<tr><td colspan="6" class="text-center">No hay datos válidos para mostrar.</td></tr>');
                 }
             } else {
                 console.error('Error en respuesta del servidor:', response);
-                const mensaje = response && response.message ? response.message : 'Error desconocido del servidor';
+                const mensaje = response && response.message ? response.message : 'Error desconocido del servidor.';
                 $('#vacunasTableBody').html(`<tr><td colspan="6" class="text-center text-danger">Error: ${mensaje}</td></tr>`);
             }
         },
@@ -60,11 +60,11 @@ function cargarVacunaciones() {
 
             let mensaje = 'Error de conexión';
             if (xhr.status === 404) {
-                mensaje = 'Archivo router.php no encontrado';
+                mensaje = 'Archivo router.php no encontrado.';
             } else if (xhr.status === 500) {
-                mensaje = 'Error interno del servidor';
+                mensaje = 'Error interno del servidor.';
             } else if (status === 'timeout') {
-                mensaje = 'Tiempo de espera agotado';
+                mensaje = 'Tiempo de espera agotado.';
             }
 
             $('#vacunasTableBody').html(`<tr><td colspan="6" class="text-center text-danger">${mensaje}</td></tr>`);
@@ -77,7 +77,7 @@ function mostrarVacunaciones(vacunaciones) {
     let html = '';
 
     if (vacunaciones.length === 0) {
-        html = '<tr><td colspan="6" class="text-center text-muted">No hay vacunaciones registradas</td></tr>';
+        html = '<tr><td colspan="6" class="text-center text-muted">No hay vacunaciones registradas.</td></tr>';
     } else {
         vacunaciones.forEach(function (vacunacion, index) {
             if (!vacunacion.id_vacuna_paciente) {
@@ -148,13 +148,13 @@ function verDetalles(id) {
             if (response && response.status === 'success' && response.data) {
                 mostrarModalDetalles(response.data);
             } else {
-                const mensaje = response && response.message ? response.message : 'No se encontraron los datos';
+                const mensaje = response && response.message ? response.message : 'No se encontraron los datos.';
                 alert('Error al cargar detalles: ' + mensaje);
             }
         },
         error: function (xhr, status, error) {
             console.error('Error al cargar detalles:', error);
-            alert('Error de conexión al cargar los detalles');
+            alert('Error de conexión al cargar detalles.');
         }
     });
 }
@@ -223,8 +223,8 @@ function editarVacunacion(id) {
     console.log('Editando vacunación ID:', id);
 
     const posiblesArchivos = [
-        `ActualizarVacunacion.html?id=${id}`,
-        `ActualizarVacunacion.html?id=${id}`,
+        `ActualizarVacunacion.php?id=${id}`,
+        `ActualizarVacunacion.php?id=${id}`,
         `EditarVacunacion.php?id=${id}`
     ];
 
@@ -241,7 +241,7 @@ function confirmarEliminacion(id) {
 
 function confirmarDeshabilitacion() {
     if (!currentVacunacionId) {
-        alert('Error: No se especificó qué vacunación eliminar');
+        alert('Error: No se especificó qué vacunación eliminar.');
         return;
     }
 
@@ -261,7 +261,7 @@ function confirmarDeshabilitacion() {
             btnConfirmar.html(textoOriginal).prop('disabled', false);
 
             if (response && response.status === 'success') {
-                alert('Vacunación eliminada exitosamente');
+                alert('Vacunación eliminada exitosamente.');
                 $('#modalConfirmacion').modal('hide');
                 currentVacunacionId = null;
                 cargarVacunaciones();
@@ -273,7 +273,7 @@ function confirmarDeshabilitacion() {
         error: function (xhr, status, error) {
             btnConfirmar.html(textoOriginal).prop('disabled', false);
             console.error('Error al eliminar:', error);
-            alert('Error de conexión al eliminar la vacunación');
+            alert('Error de conexión al eliminar vacunación');
         }
     });
 }
@@ -372,19 +372,19 @@ function cargarVacunasCatalogo() {
                 llenarSelectVacunas(response.data);
             } else {
                 console.error('Error al cargar catálogo:', response);
-                alert('Error al cargar el catálogo de vacunas');
+                alert('Error al cargar catálogo de vacunas.');
             }
         },
         error: function (xhr, status, error) {
             console.error('Error al cargar catálogo:', error);
-            alert('Error de conexión al cargar las vacunas disponibles');
+            alert('Error de conexión al cargar vacunas disponibles.');
         }
     });
 }
 
 function llenarSelectVacunas(vacunas) {
     const select = $('#id_vacuna');
-    select.empty().append('<option value="">-- Selecciona una vacuna --</option>');
+    select.empty().append('<option value="">-- Seleccione una vacuna --</option>');
 
     if (vacunas && Array.isArray(vacunas)) {
         vacunas.forEach(vacuna => {
@@ -423,19 +423,19 @@ function registrarVacunacion() {
 
             if (response && response.status === 'success') {
                 limpiarFormulario();
-                alert('✅ Vacunación registrada exitosamente');
+                alert('✅ Vacunación registrada exitosamente.');
 
                 setTimeout(() => {
                     window.location.href = 'Vacunas.php';
                 }, 1500);
             } else {
-                const mensaje = response && response.message ? response.message : 'Error desconocido';
+                const mensaje = response && response.message ? response.message : 'Error desconocido.';
                 alert('❌ Error al registrar vacunación: ' + mensaje);
             }
         },
         error: function (xhr, status, error) {
             console.error('Error al registrar vacunación:', error, xhr.responseText);
-            alert('❌ Error de conexión al registrar la vacunación');
+            alert('❌ Error de conexión al registrar vacunación.');
         },
         complete: function () {
             btnSubmit.prop('disabled', false).text(textoOriginal);
@@ -449,13 +449,13 @@ function validarFormularioVacunacion() {
 
     const nombreCompleto = $('#nombre_completo').val().trim();
     if (!nombreCompleto) {
-        errors.push('El nombre completo del paciente es requerido');
+        errors.push('El nombre completo del paciente es requerido.');
         isValid = false;
     }
 
     const idVacuna = $('#id_vacuna').val();
     if (!idVacuna || idVacuna === '') {
-        errors.push('Debe seleccionar una vacuna');
+        errors.push('Debe seleccionar una vacuna.');
         isValid = false;
     }
 
@@ -467,19 +467,19 @@ function validarFormularioVacunacion() {
 
     const tiempoTratamiento = $('#tiempo_tratamiento').val().trim();
     if (!tiempoTratamiento) {
-        errors.push('El tiempo de tratamiento es requerido');
+        errors.push('El tiempo de tratamiento es requerido.');
         isValid = false;
     }
 
     const fechaVacunacion = $('#fecha_vacunacion').val();
     if (!fechaVacunacion) {
-        errors.push('La fecha de vacunación es requerida');
+        errors.push('La fecha de vacunación es requerida.');
         isValid = false;
     }
 
     const descripcion = $('#descripcion').val().trim();
     if (!descripcion) {
-        errors.push('La descripción es requerida');
+        errors.push('La descripción es requerida.');
         isValid = false;
     }
 
@@ -500,7 +500,7 @@ function buscarPaciente() {
     const cedula = $('#cedula').val().trim();
 
     if (!cedula) {
-        alert('Por favor ingrese una cédula');
+        alert('Por favor ingrese una cédula.');
         $('#cedula').focus();
         return;
     }
@@ -517,7 +517,7 @@ function inicializarActualizacion() {
     vacunacionId = obtenerIdDeUrl();
 
     if (!vacunacionId) {
-        alert('Error: No se especificó qué vacunación editar');
+        alert('Error: No se especificó qué vacunación editar.');
         window.location.href = 'Vacunas.php';
         return;
     }
@@ -550,12 +550,12 @@ function cargarVacunasCatalogoParaEdicion() {
                 cargarDatosVacunacion();
             } else {
                 console.error('Error al cargar catálogo:', response);
-                alert('Error al cargar el catálogo de vacunas');
+                alert('Error al cargar catálogo de vacunas.');
             }
         },
         error: function (xhr, status, error) {
             console.error('Error al cargar catálogo:', error);
-            alert('Error de conexión al cargar las vacunas disponibles');
+            alert('Error de conexión al cargar vacunas disponibles.');
         }
     });
 }
@@ -574,14 +574,14 @@ function cargarDatosVacunacion() {
                 datosOriginales = response.data;
                 llenarFormularioConDatos(response.data);
             } else {
-                const mensaje = response && response.message ? response.message : 'No se encontraron los datos';
+                const mensaje = response && response.message ? response.message : 'No se encontraron los datos.';
                 alert('Error al cargar datos de la vacunación: ' + mensaje);
                 window.location.href = 'Vacunas.php';
             }
         },
         error: function (xhr, status, error) {
             console.error('Error al cargar vacunación:', error);
-            alert('Error de conexión al cargar la vacunación');
+            alert('Error de conexión al cargar vacunación');
             window.location.href = 'Vacunas.php';
         },
         complete: function () {
@@ -625,7 +625,7 @@ function actualizarVacunacion() {
     const idVacunacionPaciente = $('#id_vacuna_paciente').val();
 
     if (!idVacunacionPaciente) {
-        alert('Error: No se puede identificar la vacunación a actualizar');
+        alert('Error: No se puede identificar la vacunación a actualizar.');
         return;
     }
 
@@ -656,19 +656,19 @@ function actualizarVacunacion() {
             console.log('Respuesta de actualización:', response);
 
             if (response && response.status === 'success') {
-                alert('✅ Vacunación actualizada exitosamente');
+                alert('✅ Vacunación actualizada exitosamente.');
 
                 setTimeout(() => {
                     window.location.href = 'Vacunas.php';
                 }, 1000);
             } else {
-                const mensaje = response && response.message ? response.message : 'Error desconocido';
+                const mensaje = response && response.message ? response.message : 'Error desconocido.';
                 alert('❌ Error al actualizar vacunación: ' + mensaje);
             }
         },
         error: function (xhr, status, error) {
             console.error('Error al actualizar vacunación:', error, xhr.responseText);
-            alert('❌ Error de conexión al actualizar la vacunación');
+            alert('❌ Error de conexión al actualizar vacunación.');
         },
         complete: function () {
             btnSubmit.prop('disabled', false).text(textoOriginal);
@@ -683,37 +683,37 @@ function validarFormularioVacunacionEdit() {
 
     const nombreCompleto = $('#nombre_completo').val().trim();
     if (!nombreCompleto) {
-        errors.push('El nombre completo del paciente es requerido');
+        errors.push('El nombre completo del paciente es requerido.');
         isValid = false;
     }
 
     const idVacuna = $('#id_vacuna').val();
     if (!idVacuna || idVacuna === '') {
-        errors.push('Debe seleccionar una vacuna');
+        errors.push('Debe seleccionar una vacuna.');
         isValid = false;
     }
 
     const dosis = $('#dosis').val().trim();
     if (!dosis) {
-        errors.push('La dosis es requerida');
+        errors.push('La dosis es requerida.');
         isValid = false;
     }
 
     const tiempoTratamiento = $('#tiempo_tratamiento').val().trim();
     if (!tiempoTratamiento) {
-        errors.push('El tiempo de tratamiento es requerido');
+        errors.push('El tiempo de tratamiento es requerido.');
         isValid = false;
     }
 
     const fechaVacunacion = $('#fecha_vacunacion').val();
     if (!fechaVacunacion) {
-        errors.push('La fecha de vacunación es requerida');
+        errors.push('La fecha de vacunación es requerida.');
         isValid = false;
     }
 
     const idVacunacionPaciente = $('#id_vacuna_paciente').val();
     if (!idVacunacionPaciente) {
-        errors.push('No se puede identificar la vacunación a actualizar');
+        errors.push('No se puede identificar la vacunación a actualizar.');
         isValid = false;
     }
 
@@ -766,7 +766,7 @@ function filtrarTabla(searchTerm) {
 
     if (searchTerm && totalVisible === 0) {
         if ($('#vacunasTableBody').find('.no-results').length === 0) {
-            $('#vacunasTableBody').append('<tr class="no-results"><td colspan="6" class="text-center text-muted">No se encontraron resultados para la búsqueda</td></tr>');
+            $('#vacunasTableBody').append('<tr class="no-results"><td colspan="6" class="text-center text-muted">No se encontraron resultados para la búsqueda.</td></tr>');
         }
     } else {
         $('.no-results').remove();
@@ -803,7 +803,7 @@ function formatearFecha(fecha) {
         });
     } catch (error) {
         console.error('Error al formatear fecha:', error, fecha);
-        return 'Error en fecha';
+        return 'Error en fecha.';
     }
 }
 

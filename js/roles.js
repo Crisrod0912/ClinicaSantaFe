@@ -1,7 +1,7 @@
 let editingRolId = null;
 
 if (typeof $ === 'undefined') {
-    console.error('jQuery no está cargado');
+    console.error('jQuery no está cargado.');
 }
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -26,26 +26,26 @@ function initializePage() {
     const currentPage = window.location.pathname;
     const fileName = currentPage.split('/').pop();
 
-    if (fileName === 'RegistrarRol.html') {
-        console.log('Detectado formulario de registro de rol');
+    if (fileName === 'RegistrarRol.php') {
+        console.log('Detectado formulario de registro de rol.');
         loadFormData();
     }
 
-    else if (fileName === 'EditarRol.html') {
-        console.log('Detectado formulario de actualización de rol');
+    else if (fileName === 'EditarRol.php') {
+        console.log('Detectado formulario de actualización de rol.');
         loadFormData();
         loadRolForEditing();
     }
 
     else if (fileName === 'Roles.php' || document.querySelector('.custom-table') || document.getElementById('rolesTable')) {
-        console.log('Detectada tabla de roles');
+        console.log('Detectada tabla de roles.');
         loadRoles();
     }
 }
 
 function setupEventListeners() {
     if (typeof $ === 'undefined') {
-        console.error('jQuery no disponible para event listeners');
+        console.error('jQuery no disponible para event listeners.');
         return;
     }
 
@@ -106,12 +106,12 @@ function determineRouterUrl(action) {
 
 function populateSelect(select, data, valueField, textField) {
     if (!select || select.length === 0) {
-        console.warn('Select no encontrado para poblar');
+        console.warn('Select no encontrado para poblar.');
         return;
     }
 
     const currentValue = select.val();
-    select.empty().append('<option value="">-- Selecciona --</option>');
+    select.empty().append('<option value="">-- Seleccione --</option>');
 
     if (data && Array.isArray(data)) {
         data.forEach(item => {
@@ -137,7 +137,7 @@ function handleRolSubmit(e) {
     console.log('Datos del formulario:', formData);
 
     if (!formData.nombre || !formData.descripcion || !formData.id_estado) {
-        alert('Por favor completa todos los campos obligatorios');
+        alert('Por favor complete todos los campos obligatorios.');
         return;
     }
 
@@ -152,7 +152,7 @@ function handleRolSubmit(e) {
         success: function (response) {
             console.log('Respuesta del servidor:', response);
             if (response.status === 'success') {
-                alert('Rol registrado exitosamente');
+                alert('Rol registrado exitosamente.');
 
                 $('#nombre, #descripcion').val('');
                 $('#estado').val('');
@@ -161,12 +161,12 @@ function handleRolSubmit(e) {
                     window.location.href = 'Roles.php';
                 }, 1000);
             } else {
-                alert(response.message || 'Error al registrar el rol');
+                alert(response.message || 'Error al registrar rol.');
             }
         },
         error: function (xhr, status, error) {
             console.error('Error AJAX:', error, xhr.responseText);
-            alert('Error de conexión con el servidor. Revisa la consola para más detalles.');
+            alert('Error de conexión con el servidor. Revise la consola para más detalles.');
         }
     });
 }
@@ -176,7 +176,7 @@ function handleRolUpdate(e) {
     console.log('Actualizando rol...');
 
     if (!editingRolId) {
-        alert('Error: No se encontró el ID del rol a actualizar');
+        alert('Error: No se encontró el ID del rol a actualizar.');
         return;
     }
     
@@ -190,7 +190,7 @@ function handleRolUpdate(e) {
     console.log('Datos de actualización:', formData);
 
     if (!formData.nombre || !formData.descripcion || !formData.id_estado) {
-        alert('Por favor completa todos los campos obligatorios');
+        alert('Por favor complete todos los campos obligatorios.');
         return;
     }
 
@@ -205,18 +205,18 @@ function handleRolUpdate(e) {
         success: function (response) {
             console.log('Respuesta del servidor:', response);
             if (response.status === 'success') {
-                alert('Rol actualizado exitosamente');
+                alert('Rol actualizado exitosamente.');
 
                 setTimeout(() => {
                     window.location.href = 'Roles.php';
                 }, 1000);
             } else {
-                alert(response.message || 'Error al actualizar el rol');
+                alert(response.message || 'Error al actualizar rol.');
             }
         },
         error: function (xhr, status, error) {
             console.error('Error AJAX:', error, xhr.responseText);
-            alert('Error de conexión con el servidor. Revisa la consola para más detalles.');
+            alert('Error de conexión con el servidor. Revise la consola para más detalles.');
         }
     });
 }
@@ -226,7 +226,7 @@ function loadRolForEditing() {
     const rolId = urlParams.get('id');
 
     if (!rolId) {
-        alert('Error: No se especificó qué rol editar');
+        alert('Error: No se especificó qué rol editar.');
         window.location.href = 'Roles.php';
         return;
     }
@@ -248,14 +248,14 @@ function loadRolForEditing() {
                     fillFormWithRolData(response.data);
                 }, 1000);
             } else {
-                alert('Error al cargar los datos del rol');
+                alert('Error al cargar los datos del rol.');
                 window.location.href = 'Roles.php';
             }
         },
         error: function (xhr, status, error) {
             hideLoadingOverlay();
             console.error('Error al cargar rol:', error);
-            alert('Error de conexión al cargar el rol');
+            alert('Error de conexión al cargar rol.');
             window.location.href = 'Roles.php';
         }
     });
@@ -302,12 +302,12 @@ function loadRoles() {
             if (response.status === 'success') {
                 populateRolesTable(response.data);
             } else {
-                $('.custom-table tbody').html('<tr><td colspan="4" class="text-center">No se pudieron cargar los roles</td></tr>');
+                $('.custom-table tbody').html('<tr><td colspan="4" class="text-center">No se pudieron cargar los roles.</td></tr>');
             }
         },
         error: function (xhr, status, error) {
             console.error('Error al cargar roles:', error, xhr.responseText);
-            $('.custom-table tbody').html('<tr><td colspan="4" class="text-center">Error al cargar los roles</td></tr>');
+            $('.custom-table tbody').html('<tr><td colspan="4" class="text-center">Error al cargar roles.</td></tr>');
         }
     });
 }
@@ -316,7 +316,7 @@ function populateRolesTable(roles) {
     const tbody = $('.custom-table tbody');
 
     if (!roles || roles.length === 0) {
-        tbody.html('<tr><td colspan="4" class="text-center">No hay roles registrados</td></tr>');
+        tbody.html('<tr><td colspan="4" class="text-center">No hay roles registrados.</td></tr>');
         return;
     }
 
@@ -325,7 +325,7 @@ function populateRolesTable(roles) {
         let actionsHtml = '';
 
         actionsHtml += `
-            <a class="btn btn-sm me-1" style="background-color: #44C1F2; border-color: #44C1F2; color: white;" href="EditarRol.html?id=${rol.id_rol}" title="Editar Rol">
+            <a class="btn btn-sm me-1" style="background-color: #44C1F2; border-color: #44C1F2; color: white;" href="EditarRol.php?id=${rol.id_rol}" title="Editar Rol">
                 <i class="fas fa-edit"></i>
             </a>
         `;
@@ -374,15 +374,15 @@ function disableRole(rolId) {
         dataType: 'json',
         success: function (response) {
             if (response.status === 'success') {
-                alert('Rol deshabilitado exitosamente');
+                alert('Rol deshabilitado exitosamente.');
                 loadRoles();
             } else {
-                alert(response.message || 'Error al deshabilitar el rol');
+                alert(response.message || 'Error al deshabilitar rol.');
             }
         },
         error: function (xhr, status, error) {
             console.error('Error al deshabilitar rol:', error);
-            alert('Error de conexión al deshabilitar el rol');
+            alert('Error de conexión al deshabilitar rol.');
         }
     });
 }
@@ -404,15 +404,15 @@ function enableRole(rolId) {
         dataType: 'json',
         success: function (response) {
             if (response.status === 'success') {
-                alert('Rol habilitado exitosamente');
+                alert('Rol habilitado exitosamente.');
                 loadRoles();
             } else {
-                alert(response.message || 'Error al habilitar el rol');
+                alert(response.message || 'Error al habilitar rol.');
             }
         },
         error: function (xhr, status, error) {
             console.error('Error al habilitar rol:', error);
-            alert('Error de conexión al habilitar el rol');
+            alert('Error de conexión al habilitar rol.');
         }
     });
 }

@@ -21,7 +21,7 @@ function cargarVacunas() {
         },
         error: function (xhr, status, error) {
             console.error('Error al cargar vacunas:', error);
-            $('#vacunasResult').html('<div class="alert alert-danger">Error al cargar las vacunas</div>');
+            $('#vacunasResult').html('<div class="alert alert-danger">Error al cargar vacunas.</div>');
         }
     });
 }
@@ -30,7 +30,7 @@ function mostrarVacunas(vacunas) {
     let html = '';
 
     if (vacunas.length === 0) {
-        html = '<tr><td colspan="5" class="text-center">No tienes vacunas registradas</td></tr>';
+        html = '<tr><td colspan="5" class="text-center">No tiene vacunas registradas.</td></tr>';
     } else {
         vacunas.forEach(function (vacuna) {
             html += `
@@ -109,11 +109,11 @@ function verDetalles(id) {
                 $('#vacunaDetalles').html(detallesHtml);
                 $('#vacunaModal').modal('show');
             } else {
-                alert('Error al cargar los detalles de la vacuna');
+                alert('Error al cargar los detalles de la vacuna.');
             }
         },
         error: function () {
-            alert('Error al cargar los detalles de la vacuna');
+            alert('Error al cargar los detalles de la vacuna.');
         }
     });
 }

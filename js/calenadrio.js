@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded", function () {
         hoy.setHours(0, 0, 0, 0);
 
         if (fechaClick < hoy) {
-            showError(calendario, 'No puedes seleccionar una fecha pasada');
+            showError(calendario, 'No puede seleccionar una fecha pasada.');
             return;
         }
 

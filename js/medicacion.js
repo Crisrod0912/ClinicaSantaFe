@@ -3,9 +3,9 @@ $(document).ready(function () {
 
     const currentPage = window.location.pathname.split('/').pop();
 
-    if (currentPage === 'RegistrarMedicacion.html') {
+    if (currentPage === 'RegistrarMedicacion.php') {
         initializeRegistrationForm();
-    } else if (currentPage === 'ActualizarMedicacion.html') {
+    } else if (currentPage === 'ActualizarMedicacion.php') {
         initializeUpdateForm();
     } else if (currentPage === 'Medicamentos.php') {
         initializeMedicationsTable();
@@ -35,7 +35,7 @@ function initializeUpdateForm() {
     if (medicacionId) {
         loadMedicacionForUpdate(medicacionId);
     } else {
-        alert('Error: No se especificó qué medicación editar');
+        alert('Error: No se especificó qué medicación editar.');
         window.location.href = 'Medicamentos.php';
     }
 
@@ -66,19 +66,19 @@ function loadMedicamentoCatalog() {
                 populateMedicamentoSelect(response.data);
             } else {
                 console.error('Error al cargar medicamentos:', response.message);
-                showError('Error al cargar el catálogo de medicamentos');
+                showError('Error al cargar catálogo de medicamentos.');
             }
         },
         error: function (xhr, status, error) {
             console.error('Error al cargar medicamentos:', error);
-            showError('Error de conexión al cargar medicamentos');
+            showError('Error de conexión al cargar medicamentos.');
         }
     });
 }
 
 function populateMedicamentoSelect(medicamentos) {
     const select = $('#medicamento');
-    select.empty().append('<option value="">-- Selecciona un medicamento --</option>');
+    select.empty().append('<option value="">-- Seleccione un medicamento --</option>');
 
     medicamentos.forEach(medicamento => {
         select.append(`
@@ -111,9 +111,6 @@ function setupPatientSearch() {
     });
 }
 
-/**
- * Buscar paciente por cédula
- */
 function searchPatientByCedula(cedula) {
     if (cedula.length < 9) return;
 
@@ -133,7 +130,7 @@ function searchPatientByCedula(cedula) {
                 $('#cedula').removeData('paciente-id');
 
                 if (cedula.length >= 9) {
-                    showError('Paciente no encontrado con esa cédula');
+                    showError('Paciente no encontrado con esa cédula.');
                 }
             }
         },
@@ -201,30 +198,30 @@ function validateRegistrationForm() {
     const pacienteId = $('#cedula').data('paciente-id');
 
     if (!cedula) {
-        errors.push('La cédula del paciente es requerida');
+        errors.push('La cédula del paciente es requerida.');
         isValid = false;
     } else if (!pacienteId) {
-        errors.push('Debe seleccionar un paciente válido');
+        errors.push('Debe seleccionar un paciente válido.');
         isValid = false;
     }
 
     if (!$('#medicamento').val()) {
-        errors.push('Debe seleccionar un medicamento');
+        errors.push('Debe seleccionar un medicamento.');
         isValid = false;
     }
 
     if (!$('#tiempo').val().trim()) {
-        errors.push('El tiempo de tratamiento es requerido');
+        errors.push('El tiempo de tratamiento es requerido.');
         isValid = false;
     }
 
     if (!$('#indicaciones').val().trim()) {
-        errors.push('Las indicaciones son requeridas');
+        errors.push('Las indicaciones son requeridas.');
         isValid = false;
     }
 
     if (!$('#fecha').val()) {
-        errors.push('La fecha de prescripción es requerida');
+        errors.push('La fecha de prescripción es requerida.');
         isValid = false;
     }
 
@@ -249,7 +246,7 @@ function registerMedicacion(formData) {
         success: function (response) {
             console.log('Respuesta del registro:', response);
             if (response.status === 'success') {
-                showSuccess('Medicación registrada exitosamente');
+                showSuccess('Medicación registrada exitosamente.');
 
                 resetForm();
 
@@ -262,7 +259,7 @@ function registerMedicacion(formData) {
         },
         error: function (xhr, status, error) {
             console.error('Error al registrar medicación:', error, xhr.responseText);
-            showError('Error de conexión al registrar la medicación');
+            showError('Error de conexión al registrar medicación.');
         },
         complete: function () {
             $('#form-registro button[type="submit"]').prop('disabled', false).text('Registrar Medicación');
@@ -287,7 +284,7 @@ function loadMedicacionForUpdate(medicacionId) {
         },
         error: function (xhr, status, error) {
             console.error('Error al cargar medicación:', error);
-            showError('Error de conexión al cargar los datos');
+            showError('Error de conexión al cargar datos.');
             window.location.href = 'Medicamentos.php';
         }
     });
@@ -322,7 +319,7 @@ function updateMedicacion(formData) {
         success: function (response) {
             console.log('Respuesta de actualización:', response);
             if (response.status === 'success') {
-                showSuccess('Medicación actualizada exitosamente');
+                showSuccess('Medicación actualizada exitosamente.');
 
                 setTimeout(() => {
                     window.location.href = 'Medicamentos.php';
@@ -333,7 +330,7 @@ function updateMedicacion(formData) {
         },
         error: function (xhr, status, error) {
             console.error('Error al actualizar medicación:', error, xhr.responseText);
-            showError('Error de conexión al actualizar la medicación');
+            showError('Error de conexión al actualizar medicación.');
         },
         complete: function () {
             $('#form-registro button[type="submit"]').prop('disabled', false).text('Actualizar Medicación');
@@ -353,12 +350,12 @@ function loadAllPatientMedications() {
             if (response.status === 'success') {
                 populateAllMedicationsTable(response.data);
             } else {
-                showTableError('No se pudieron cargar las medicaciones');
+                showTableError('No se pudieron cargar las medicaciones.');
             }
         },
         error: function (xhr, status, error) {
             console.error('Error al cargar medicaciones:', error);
-            showTableError('Error de conexión al cargar las medicaciones');
+            showTableError('Error de conexión al cargar medicaciones.');
         }
     });
 }
@@ -367,7 +364,7 @@ function populateAllMedicationsTable(medicaciones) {
     const tbody = $('#medicamentosTableBody');
 
     if (!medicaciones || medicaciones.length === 0) {
-        tbody.html('<tr><td colspan="7" class="text-center">No hay medicaciones registradas</td></tr>');
+        tbody.html('<tr><td colspan="7" class="text-center">No hay medicaciones registradas.</td></tr>');
         return;
     }
 
@@ -580,15 +577,15 @@ function enableMedication(medicacionId) {
         dataType: 'json',
         success: function (response) {
             if (response.status === 'success') {
-                showSuccess('Medicación habilitada exitosamente');
+                showSuccess('Medicación habilitada exitosamente.');
                 loadAllPatientMedications();
             } else {
-                showError(response.message || 'Error al habilitar la medicación');
+                showError(response.message || 'Error al habilitar la medicación.');
             }
         },
         error: function (xhr, status, error) {
             console.error('Error al habilitar medicación:', error, xhr.responseText);
-            showError('Error de conexión al habilitar la medicación');
+            showError('Error de conexión al habilitar medicación.');
         }
     });
 }
@@ -597,7 +594,7 @@ function confirmarDeshabilitar() {
     const medicacionId = window.currentMedicacionId;
 
     if (!medicacionId) {
-        showError('Error: No se encontró la medicación a deshabilitar');
+        showError('Error: No se encontró la medicación a deshabilitar.');
         return;
     }
 
@@ -613,16 +610,16 @@ function confirmarDeshabilitar() {
         dataType: 'json',
         success: function (response) {
             if (response.status === 'success') {
-                showSuccess('Medicación deshabilitada exitosamente');
+                showSuccess('Medicación deshabilitada exitosamente.');
                 $('#modalConfirmacion').modal('hide');
                 loadAllPatientMedications();
             } else {
-                showError(response.message || 'Error al deshabilitar la medicación');
+                showError(response.message || 'Error al deshabilitar medicación.');
             }
         },
         error: function (xhr, status, error) {
             console.error('Error al deshabilitar medicación:', error, xhr.responseText);
-            showError('Error de conexión al deshabilitar la medicación');
+            showError('Error de conexión al deshabilitar medicación.');
         }
     });
 }

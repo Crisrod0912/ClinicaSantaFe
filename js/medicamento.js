@@ -27,14 +27,14 @@ function loadPatientMedications() {
                 medicamentosData = response.data;
                 populateMedicationsTable(response.data);
             } else {
-                $('#medicamentosTableBody').html('<tr><td colspan="6" class="text-center">No se pudieron cargar los medicamentos</td></tr>');
+                $('#medicamentosTableBody').html('<tr><td colspan="6" class="text-center">No se pudieron cargar los medicamentos.</td></tr>');
                 mostrarError('Error al cargar medicamentos: ' + response.message);
             }
         },
         error: function (xhr, status, error) {
             console.error('Error al cargar medicamentos:', error, xhr.responseText);
-            $('#medicamentosTableBody').html('<tr><td colspan="6" class="text-center">Error al cargar los medicamentos</td></tr>');
-            mostrarError('Error de conexión al cargar los medicamentos.');
+            $('#medicamentosTableBody').html('<tr><td colspan="6" class="text-center">Error al cargar medicamentos.</td></tr>');
+            mostrarError('Error de conexión al cargar medicamentos.');
         }
     });
 }
@@ -73,7 +73,7 @@ function populateMedicationsTable(medicamentos) {
     const tbody = $('#medicamentosTableBody');
 
     if (!medicamentos || medicamentos.length === 0) {
-        tbody.html('<tr><td colspan="6" class="text-center">No tienes medicamentos registrados</td></tr>');
+        tbody.html('<tr><td colspan="6" class="text-center">No tienes medicamentos registrados.</td></tr>');
         return;
     }
 
@@ -96,9 +96,7 @@ function populateMedicationsTable(medicamentos) {
 
         rows += `
             <tr>
-                <td>
-                    ${medicamento.nombre_medicamento || 'Medicamento N/A'}
-                </td>
+                <td>${medicamento.nombre_medicamento || 'Medicamento N/A'}</td>
                 <td>${medicamento.grupo_terapeutico || 'N/A'}</td>
                 <td>${medicamento.via_administracion || 'N/A'}</td>
                 <td>${medicamento.forma_farmaceutica || 'N/A'}</td>

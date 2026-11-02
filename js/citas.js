@@ -1,7 +1,7 @@
 let editingCitaId = null;
 
 if (typeof $ === 'undefined') {
-    console.error('jQuery no está cargado');
+    console.error('jQuery no está cargado.');
 }
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -26,15 +26,15 @@ function initializePage() {
     const currentPage = window.location.pathname;
     const fileName = currentPage.split('/').pop();
 
-    if (fileName === 'RegistrarCita.html') {
-        console.log('Detectado formulario de registro');
+    if (fileName === 'RegistrarCita.php') {
+        console.log('Detectado formulario de registro.');
         loadFormData();
         setupDateRestrictions();
         initializeCalendar();
     }
 
-    else if (fileName === 'ActualizarCita.html') {
-        console.log('Detectado formulario de actualización');
+    else if (fileName === 'ActualizarCita.php') {
+        console.log('Detectado formulario de actualización.');
         loadFormData();
         setupDateRestrictions();
         initializeCalendar();
@@ -42,7 +42,7 @@ function initializePage() {
     }
 
     else if (fileName === 'HistorialCitas.php' || document.querySelector('.custom-table') || document.getElementById('citasTable')) {
-        console.log('Detectada tabla de citas');
+        console.log('Detectada tabla de citas.');
         loadPatientAppointments();
     }
 }
@@ -81,13 +81,13 @@ function loadPatientAppointments() {
                 statusText: xhr.statusText
             });
 
-            let errorMsg = 'Error de conexión al cargar las citas';
+            let errorMsg = 'Error de conexión al cargar citas.';
             if (xhr.status === 404) {
-                errorMsg = 'Endpoint no encontrado (404)';
+                errorMsg = 'Endpoint no encontrado (404).';
             } else if (xhr.status === 500) {
-                errorMsg = 'Error interno del servidor (500)';
+                errorMsg = 'Error interno del servidor (500).';
             } else if (status === 'timeout') {
-                errorMsg = 'Timeout - El servidor tardó demasiado en responder';
+                errorMsg = 'Timeout - El servidor tardó demasiado en responder.';
             }
 
             tbody.html('<tr><td colspan="7" class="text-center text-danger">' + errorMsg + '</td></tr>');
@@ -97,7 +97,7 @@ function loadPatientAppointments() {
 
 function setupEventListeners() {
     if (typeof $ === 'undefined') {
-        console.error('jQuery no disponible para event listeners');
+        console.error('jQuery no disponible para event listeners.');
         return;
     }
 
@@ -148,7 +148,7 @@ function initializeCalendar() {
             hoy.setHours(0, 0, 0, 0);
 
             if (fechaClick < hoy) {
-                alert('No puedes seleccionar una fecha pasada');
+                alert('No puede seleccionar una fecha pasada.');
                 return;
             }
 
@@ -226,7 +226,7 @@ function determineRouterUrl(action) {
 
 function populateSelect(select, data, valueField, textField) {
     if (!select || select.length === 0) {
-        console.warn('Select no encontrado para poblar');
+        console.warn('Select no encontrado para poblar.');
         return;
     }
 
@@ -269,7 +269,7 @@ function checkAvailability() {
                 if (response.data && response.data.length > 0) {
                     console.log('Médicos disponibles:', response.data.length);
                 } else {
-                    alert('No hay médicos disponibles en este horario. Por favor selecciona otro.');
+                    alert('No hay médicos disponibles en este horario. Por favor seleccione otro.');
                 }
             }
         },
@@ -294,7 +294,7 @@ function handleCitaSubmit(e) {
     console.log('Datos del formulario:', formData);
 
     if (!formData.id_servicio || !formData.id_especialidad || !formData.hora || !formData.fecha) {
-        alert('Por favor completa todos los campos obligatorios');
+        alert('Por favor completae todos los campos obligatorios.');
         return;
     }
 
@@ -309,7 +309,7 @@ function handleCitaSubmit(e) {
         success: function (response) {
             console.log('Respuesta del servidor:', response);
             if (response.status === 'success') {
-                alert('Cita registrada exitosamente');
+                alert('Cita registrada exitosamente.');
 
                 $('#servicio, #especialidad, #hora').val('');
                 $('#fecha').val('');
@@ -318,12 +318,12 @@ function handleCitaSubmit(e) {
                     window.location.href = 'HistorialCitas.php';
                 }, 1000);
             } else {
-                alert(response.message || 'Error al registrar la cita');
+                alert(response.message || 'Error al registrar cita.');
             }
         },
         error: function (xhr, status, error) {
             console.error('Error AJAX:', error, xhr.responseText);
-            alert('Error de conexión con el servidor. Revisa la consola para más detalles.');
+            alert('Error de conexión con el servidor. Revise la consola para más detalles.');
         }
     });
 }
@@ -333,7 +333,7 @@ function handleUpdateCita(e) {
     console.log('Actualizando cita...');
 
     if (!editingCitaId) {
-        alert('Error: No se encontró el ID de la cita a actualizar');
+        alert('Error: No se encontró el ID de la cita a actualizar.');
         return;
     }
 
@@ -349,7 +349,7 @@ function handleUpdateCita(e) {
     console.log('Datos de actualización:', formData);
 
     if (!formData.id_servicio || !formData.id_especialidad || !formData.hora || !formData.fecha) {
-        alert('Por favor completa todos los campos obligatorios');
+        alert('Por favor complete todos los campos obligatorios.');
         return;
     }
 
@@ -364,18 +364,18 @@ function handleUpdateCita(e) {
         success: function (response) {
             console.log('Respuesta del servidor:', response);
             if (response.status === 'success') {
-                alert('Cita actualizada exitosamente');
+                alert('Cita actualizada exitosamente.');
 
                 setTimeout(() => {
                     window.location.href = 'HistorialCitas.php';
                 }, 1000);
             } else {
-                alert(response.message || 'Error al actualizar la cita');
+                alert(response.message || 'Error al actualizar cita.');
             }
         },
         error: function (xhr, status, error) {
             console.error('Error AJAX:', error, xhr.responseText);
-            alert('Error de conexión con el servidor. Revisa la consola para más detalles.');
+            alert('Error de conexión con el servidor. Revise la consola para más detalles.');
         }
     });
 }
@@ -407,14 +407,14 @@ function loadCitaForEditing() {
                     fillFormWithCitaData(response.data);
                 }, 1000);
             } else {
-                alert('Error al cargar los datos de la cita');
+                alert('Error al cargar los datos de la cita.');
                 window.location.href = 'HistorialCitas.php';
             }
         },
         error: function (xhr, status, error) {
             hideLoadingOverlay();
             console.error('Error al cargar cita:', error);
-            alert('Error de conexión al cargar la cita');
+            alert('Error de conexión al cargar cita.');
             window.location.href = 'HistorialCitas.php';
         }
     });
@@ -465,7 +465,7 @@ function populateAppointmentsTable(citas) {
     const tbody = $('#citasTable tbody');
 
     if (!citas || citas.length === 0) {
-        tbody.html('<tr><td colspan="7" class="text-center">No tienes citas registradas</td></tr>');
+        tbody.html('<tr><td colspan="7" class="text-center">No tiene citas registradas.</td></tr>');
         return;
     }
 
@@ -522,11 +522,11 @@ function canCancelAppointment(estadoId) {
 
 function editAppointment(citaId) {
     console.log('Redirigiendo a editar cita:', citaId);
-    window.location.href = `ActualizarCita.html?id=${citaId}`;
+    window.location.href = `ActualizarCita.php?id=${citaId}`;
 }
 
 function cancelAppointment(citaId) {
-    if (!confirm('¿Estás seguro de que deseas cancelar esta cita?')) {
+    if (!confirm('¿Está seguro de que desea cancelar esta cita?')) {
         return;
     }
 
@@ -542,15 +542,15 @@ function cancelAppointment(citaId) {
         dataType: 'json',
         success: function (response) {
             if (response.status === 'success') {
-                alert('Cita cancelada exitosamente');
+                alert('Cita cancelada exitosamente.');
                 loadPatientAppointments();
             } else {
-                alert(response.message || 'Error al cancelar la cita');
+                alert(response.message || 'Error al cancelar cita.');
             }
         },
         error: function (xhr, status, error) {
             console.error('Error al cancelar cita:', error);
-            alert('Error de conexión al cancelar la cita');
+            alert('Error de conexión al cancelar cita.');
         }
     });
 }

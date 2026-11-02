@@ -1,7 +1,7 @@
 let editingUserId = null;
 
 if (typeof $ === 'undefined') {
-    console.error('jQuery no está cargado');
+    console.error('jQuery no está cargado.');
 }
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -26,26 +26,26 @@ function initializePage() {
     const currentPage = window.location.pathname;
     const fileName = currentPage.split('/').pop();
 
-    if (fileName === 'RegistrarUsuario.html') {
-        console.log('Detectado formulario de registro de usuario');
+    if (fileName === 'RegistrarUsuario.php') {
+        console.log('Detectado formulario de registro de usuario.');
         loadFormData();
     }
 
     else if (fileName === 'EditarUsuario.html') {
-        console.log('Detectado formulario de actualización de usuario');
+        console.log('Detectado formulario de actualización de usuario.');
         loadFormData();
         loadUserForEditing();
     }
 
     else if (fileName === 'Usuarios.php' || document.querySelector('.custom-table') || document.getElementById('usuariosTable')) {
-        console.log('Detectada tabla de usuarios');
+        console.log('Detectada tabla de usuarios.');
         loadUsers();
     }
 }
 
 function setupEventListeners() {
     if (typeof $ === 'undefined') {
-        console.error('jQuery no disponible para event listeners');
+        console.error('jQuery no disponible para event listeners.');
         return;
     }
 
@@ -177,7 +177,7 @@ function populateSelect(select, data, valueField, textField) {
     }
 
     const currentValue = select.val();
-    select.empty().append('<option value="">-- Selecciona --</option>');
+    select.empty().append('<option value="">-- Seleccione --</option>');
 
     if (data && Array.isArray(data)) {
         data.forEach(item => {
@@ -212,7 +212,7 @@ function handleUserSubmit(e) {
     console.log('Datos del formulario:', formData);
 
     if (!formData.cedula || !formData.nombre || !formData.apellidos || !formData.correo || !formData.direccion || !formData.password || !formData.id_rol || !formData.id_estado) {
-        alert('Por favor completa todos los campos obligatorios');
+        alert('Por favor complete todos los campos obligatorios.');
         return;
     }
 
@@ -236,12 +236,12 @@ function handleUserSubmit(e) {
                     window.location.href = 'Usuarios.php';
                 }, 1000);
             } else {
-                alert(response.message || 'Error al registrar el usuario');
+                alert(response.message || 'Error al registrar usuario.');
             }
         },
         error: function (xhr, status, error) {
             console.error('Error AJAX:', error, xhr.responseText);
-            alert('Error de conexión con el servidor. Revisa la consola para más detalles.');
+            alert('Error de conexión con el servidor. Revise la consola para más detalles.');
         }
     });
 }
@@ -251,7 +251,7 @@ function handleUserUpdate(e) {
     console.log('Actualizando usuario...');
 
     if (!editingUserId) {
-        alert('Error: No se encontró el ID del usuario a actualizar');
+        alert('Error: No se encontró el ID del usuario a actualizar.');
         return;
     }
 
@@ -274,7 +274,7 @@ function handleUserUpdate(e) {
     console.log('Datos de actualización:', formData);
 
     if (!formData.cedula || !formData.nombre || !formData.apellidos || !formData.correo || !formData.direccion || !formData.id_rol || !formData.id_estado) {
-        alert('Por favor completa todos los campos obligatorios');
+        alert('Por favor complete todos los campos obligatorios.');
         return;
     }
 
@@ -289,18 +289,18 @@ function handleUserUpdate(e) {
         success: function (response) {
             console.log('Respuesta del servidor:', response);
             if (response.status === 'success') {
-                alert('Usuario actualizado exitosamente');
+                alert('Usuario actualizado exitosamente.');
 
                 setTimeout(() => {
                     window.location.href = 'Usuarios.php';
                 }, 1000);
             } else {
-                alert(response.message || 'Error al actualizar el usuario');
+                alert(response.message || 'Error al actualizar usuario.');
             }
         },
         error: function (xhr, status, error) {
             console.error('Error AJAX:', error, xhr.responseText);
-            alert('Error de conexión con el servidor. Revisa la consola para más detalles.');
+            alert('Error de conexión con el servidor. Revise la consola para más detalles.');
         }
     });
 }
@@ -310,7 +310,7 @@ function loadUserForEditing() {
     const userId = urlParams.get('id');
 
     if (!userId) {
-        alert('Error: No se especificó qué usuario editar');
+        alert('Error: No se especificó qué usuario editar.');
         window.location.href = 'Usuarios.php';
         return;
     }
@@ -332,14 +332,14 @@ function loadUserForEditing() {
                     fillFormWithUserData(response.data);
                 }, 1500);
             } else {
-                alert('Error al cargar los datos del usuario');
+                alert('Error al cargar los datos del usuario.');
                 window.location.href = 'Usuarios.php';
             }
         },
         error: function (xhr, status, error) {
             hideLoadingOverlay();
             console.error('Error al cargar usuario:', error);
-            alert('Error de conexión al cargar el usuario');
+            alert('Error de conexión al cargar usuario.');
             window.location.href = 'Usuarios.php';
         }
     });
@@ -394,12 +394,12 @@ function loadUsers() {
             if (response.status === 'success') {
                 populateUsersTable(response.data);
             } else {
-                $('.custom-table tbody').html('<tr><td colspan="7" class="text-center">No se pudieron cargar los usuarios</td></tr>');
+                $('.custom-table tbody').html('<tr><td colspan="7" class="text-center">No se pudieron cargar los usuarios.</td></tr>');
             }
         },
         error: function (xhr, status, error) {
             console.error('Error al cargar usuarios:', error, xhr.responseText);
-            $('.custom-table tbody').html('<tr><td colspan="7" class="text-center">Error al cargar los usuarios</td></tr>');
+            $('.custom-table tbody').html('<tr><td colspan="7" class="text-center">Error al cargar los usuarios.</td></tr>');
         }
     });
 }
@@ -408,7 +408,7 @@ function populateUsersTable(usuarios) {
     const tbody = $('.custom-table tbody');
 
     if (!usuarios || usuarios.length === 0) {
-        tbody.html('<tr><td colspan="7" class="text-center">No hay usuarios registrados</td></tr>');
+        tbody.html('<tr><td colspan="7" class="text-center">No hay usuarios registrados.</td></tr>');
         return;
     }
 
@@ -417,7 +417,7 @@ function populateUsersTable(usuarios) {
         let actionsHtml = `<div class="d-flex gap-1 justify-content-center">`;
 
         actionsHtml += `
-            <a class="btn btn-sm" style="background-color: #44C1F2; border-color: #44C1F2; color: white; min-width: 35px;" href="EditarUsuario.html?id=${usuario.id_usuario}" title="Editar Usuario">
+            <a class="btn btn-sm" style="background-color: #44C1F2; border-color: #44C1F2; color: white; min-width: 35px;" href="EditarUsuario.php?id=${usuario.id_usuario}" title="Editar Usuario">
                 <i class="fas fa-edit"></i>
             </a>
         `;
@@ -471,15 +471,15 @@ function disableUser(userId) {
         dataType: 'json',
         success: function (response) {
             if (response.status === 'success') {
-                alert('Usuario deshabilitado exitosamente');
+                alert('Usuario deshabilitado exitosamente.');
                 loadUsers();
             } else {
-                alert(response.message || 'Error al deshabilitar el usuario');
+                alert(response.message || 'Error al deshabilitar usuario.');
             }
         },
         error: function (xhr, status, error) {
             console.error('Error al deshabilitar usuario:', error);
-            alert('Error de conexión al deshabilitar el usuario');
+            alert('Error de conexión al deshabilitar usuario.');
         }
     });
 }
@@ -501,15 +501,15 @@ function enableUser(userId) {
         dataType: 'json',
         success: function (response) {
             if (response.status === 'success') {
-                alert('Usuario habilitado exitosamente');
+                alert('Usuario habilitado exitosamente.');
                 loadUsers();
             } else {
-                alert(response.message || 'Error al habilitar el usuario');
+                alert(response.message || 'Error al habilitar usuario.');
             }
         },
         error: function (xhr, status, error) {
             console.error('Error al habilitar usuario:', error);
-            alert('Error de conexión al habilitar el usuario');
+            alert('Error de conexión al habilitar usuario.');
         }
     });
 }
