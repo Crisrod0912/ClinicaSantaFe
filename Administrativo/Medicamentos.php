@@ -8,7 +8,7 @@
     <title>Medicamentos</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/customStyle.css" />
 </head>
 
 <body>
@@ -27,8 +27,7 @@
 
                 <div class="row mb-4">
                     <div class="col-4">
-                        <a type="button" class="btn btn-nuevo" href="RegistrarMedicamentos.html">+ Registrar
-                            Medicamento</a>
+                        <a type="button" class="btn btn-nuevo" href="RegistrarMedicamentos.php">+ Registrar Medicamento</a>
                     </div>
                 </div>
 
@@ -64,8 +63,7 @@
                     <div class="text-center">
                         <i class="fas fa-exclamation-triangle text-warning mb-3" style="font-size: 3rem;"></i>
                         <h5 class="mb-3">¿Está seguro que desea deshabilitar este medicamento?</h5>
-                        <p class="text-muted">Esta acción cambiará el estado del medicamento a "Inactivo". Podrá
-                            habilitarlo nuevamente si es necesario.</p>
+                        <p class="text-muted">Esta acción cambiará el estado del medicamento a "Inactivo". Podrá habilitarlo nuevamente si es necesario.</p>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -80,6 +78,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js"></script>
     <script src="../js/jquery-3.7.1.min.js"></script>
     <script src="../js/admin-medicamentos.js"></script>
+    
 </body>
 
 </html>

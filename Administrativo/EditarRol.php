@@ -1,3 +1,35 @@
+<?php
+$actualizarRol = '
+<h1 class="text-center mb-5">Actualizar Rol</h1>
+
+<form id="form-registro">
+    <div class="row mb-4">
+        <div class="col-md-4 mb-3">
+            <label for="nombre" class="form-label fw-bold">Nombre</label>
+            <input type="text" id="nombre" name="nombre" class="form-control" />
+
+            <label for="estado" class="form-label fw-bold mt-3">Estado</label>
+            <select id="estado" name="estado" class="form-select">
+                <option value="">-- Seleccione --</option>
+            </select>
+        </div>
+
+        <div class="col-md-8 mb-3">
+            <label for="descripcion" class="form-label fw-bold">Descripción</label>
+            <textarea id="descripcion" name="descripcion" class="form-control" rows="6"></textarea>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12 text-center">
+            <button type="submit" class="btn btn-register">Actualizar Rol</button>
+            <a href="Roles.php" class="btn btn-secondary ms-2">Cancelar</a>
+        </div>
+    </div>
+</form>
+';
+?>
+
 <!DOCTYPE html>
 
 <html lang="en">
@@ -8,13 +40,13 @@
     <title>Actualizar Rol</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/customStyle.css" />
 </head>
 
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container-fluid">
-            <a href="inicioAdmin.html" class="navbar-brand d-flex align-items-center">
+            <a href="InicioAdmin.php" class="navbar-brand d-flex align-items-center">
                 <div class="logo"></div>
             </a>
             <div class="navbar-nav me-auto">
@@ -34,33 +66,7 @@
     <div class="container mt-5">
         <div class="row justify-content-center">
             <div class="col-md-10">
-                <h1 class="text-center mb-5">Actualizar Rol</h1>
-
-                <form id="form-registro">
-                    <div class="row mb-4">
-                        <div class="col-md-4 mb-3">
-                            <label for="nombre" class="form-label fw-bold">Nombre</label>
-                            <input type="text" id="nombre" name="nombre" class="form-control" />
-
-                            <label for="estado" class="form-label fw-bold mt-3">Estado</label>
-                            <select id="estado" name="estado" class="form-select">
-                                <option value="">-- Selecciona --</option>
-                            </select>
-                        </div>
-
-                        <div class="col-md-8 mb-3">
-                            <label for="descripcion" class="form-label fw-bold">Descripción</label>
-                            <textarea id="descripcion" name="descripcion" class="form-control" rows="6"></textarea>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-12 text-center">
-                            <button type="submit" class="btn btn-register">Actualizar Rol</button>
-                            <a href="Roles.php" class="btn btn-secondary ms-2">Cancelar</a>
-                        </div>
-                    </div>
-                </form>
+                <?php echo $actualizarRol?>
             </div>
         </div>
     </div>
@@ -78,6 +84,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
     <script src="../js/jquery-3.7.1.min.js"></script>
     <script src="../js/roles.js"></script>
+    
 </body>
 
 </html>
