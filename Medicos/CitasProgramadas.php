@@ -11,11 +11,11 @@ echo "<!-- Session debug: " . print_r($_SESSION, true) . " -->";
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Citas</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/customStyle.css" />
 </head>
 
 <body>
-    <?php include("../components/MenuMedico.php") ?>
+    <?php include("../components/MenuMedico.php")?>
 
     <div class="container mt-5">
         <div class="row justify-content-center">
@@ -49,6 +49,7 @@ echo "<!-- Session debug: " . print_r($_SESSION, true) . " -->";
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
     <script src="../js/jquery-3.7.1.min.js"></script>
     <script src="../js/medico-citas.js"></script>
+    
 </body>
 
 </html>

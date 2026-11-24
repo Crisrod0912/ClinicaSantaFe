@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Expedientes</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/customStyle.css" />
 </head>
 
 <body>
@@ -19,8 +19,7 @@
                 <h1 class="text-center mb-5">Expedientes de Pacientes</h1>
 
                 <div class="mb-4">
-                    <input type="text" class="search-input w-100"
-                        placeholder="Buscar por cédula o nombre del paciente...">
+                    <input type="text" class="search-input w-100" placeholder="Buscar por cédula o nombre del paciente...">
                 </div>
 
                 <table class="custom-table table">
@@ -43,11 +42,11 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js"></script>
+    
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             cargarExpedientes();
 
-            // Configurar búsqueda
             const searchInput = document.querySelector('.search-input');
             if (searchInput) {
                 searchInput.addEventListener('input', function () {
@@ -69,7 +68,7 @@
                 })
                 .catch(error => {
                     console.error('Error de conexión:', error);
-                    mostrarError('Error de conexión al cargar expedientes');
+                    mostrarError('Error de conexión al cargar expedientes.');
                 });
         }
 
@@ -80,7 +79,7 @@
             if (expedientes.length === 0) {
                 tbody.innerHTML = `
                 <tr>
-                    <td colspan="3" class="text-center">No hay expedientes disponibles</td>
+                    <td colspan="3" class="text-center">No hay expedientes disponibles.</td>
                 </tr>
             `;
                 return;
@@ -91,14 +90,10 @@
                 <td>${exp.cedula_usuario}</td>
                 <td>${exp.nombre_completo}</td>
                 <td>
-                    <button type="button" class="btn-action btn-ver me-2" 
-                            onclick="verExpediente(${exp.id_usuario})" 
-                            title="Ver Expediente">
+                    <button type="button" class="btn-action btn-ver me-2" onclick="verExpediente(${exp.id_usuario})" title="Ver Expediente">
                         <i class="fas fa-file-medical"></i> Ver
                     </button>
-                    <button type="button" class="btn-action btn-editar" 
-                            onclick="editarExpediente(${exp.id_usuario})" 
-                            title="Editar Expediente">
+                    <button type="button" class="btn-action btn-editar" onclick="editarExpediente(${exp.id_usuario})" title="Editar Expediente">
                         <i class="fas fa-edit"></i> Editar
                     </button>
                 </td>
@@ -120,17 +115,18 @@
         }
 
         function verExpediente(idUsuario) {
-            window.location.href = `Expediente.html?id_usuario=${idUsuario}`;
+            window.location.href = `Expediente.php?id_usuario=${idUsuario}`;
         }
 
         function editarExpediente(idUsuario) {
-            window.location.href = `ActualizarExpediente.html?id_usuario=${idUsuario}`;
+            window.location.href = `ActualizarExpediente.php?id_usuario=${idUsuario}`;
         }
 
         function mostrarError(mensaje) {
             alert('❌ ' + mensaje);
         }
     </script>
+    
 </body>
 
 </html>
